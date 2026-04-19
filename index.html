@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ERPNexus — Professional Odoo & ERPNext App Development</title>
+<meta name="description" content="ERPNexus builds production-ready modules for Odoo and ERPNext. Purpose-built apps by ERP specialists.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cyan:     #00B4D8;
+  --cyan-dim: #0096B4;
+  --cyan-glow:#00D4FF;
+  --orange:   #FF6B35;
+  --purple:   #8B5CF6;
+  --navy:     #0A1628;
+  --navy2:    #0D1F35;
+  --navy3:    #112240;
+  --card:     rgba(13,31,53,0.9);
+  --border:   rgba(0,180,216,0.15);
+  --border2:  rgba(0,180,216,0.3);
+  --text:     #E8F4F8;
+  --muted:    #7BA7BC;
+  --dim:      #3D6878;
+  --ff:       'Outfit', sans-serif;
+  --mono:     'JetBrains Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--navy);
+  color: var(--text);
+  font-family: var(--ff);
+  font-size: 16px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,180,216,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,180,216,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+  animation: orbFloat 12s ease-in-out infinite;
+}
+.orb-1 { width: 500px; height: 500px; background: rgba(0,180,216,0.07); top: -100px; left: -100px; animation-delay: 0s; }
+.orb-2 { width: 400px; height: 400px; background: rgba(139,92,246,0.06); top: 40%; right: -80px; animation-delay: -4s; }
+.orb-3 { width: 350px; height: 350px; background: rgba(255,107,53,0.05); bottom: 10%; left: 30%; animation-delay: -8s; }
+
+@keyframes orbFloat {
+  0%,100% { transform: translate(0,0) scale(1); }
+  33%      { transform: translate(30px,-20px) scale(1.05); }
+  66%      { transform: translate(-20px,30px) scale(0.95); }
+}
+
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6%;
+  height: 68px;
+  background: rgba(10,22,40,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.nav-logo-icon {
+  width: 36px; height: 36px;
+  background: linear-gradient(135deg, var(--cyan), var(--cyan-dim));
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 18px;
+  color: var(--navy);
+  box-shadow: 0 0 20px rgba(0,180,216,0.4);
+}
+.nav-logo-text { font-weight: 700; font-size: 19px; color: var(--text); letter-spacing: -0.5px; }
+.nav-logo-text span { color: var(--cyan); }
+
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a {
+  color: var(--muted); text-decoration: none;
+  font-size: 14px; font-weight: 500;
+  transition: color 0.2s;
+  position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute;
+  bottom: -4px; left: 0; right: 0;
+  height: 1px; background: var(--cyan);
+  transform: scaleX(0); transition: transform 0.2s;
+}
+.nav-links a:hover { color: var(--cyan); }
+.nav-links a:hover::after { transform: scaleX(1); }
+.nav-cta {
+  color: var(--cyan) !important;
+  border: 1px solid var(--cyan) !important;
+  padding: 8px 22px; border-radius: 6px;
+  font-weight: 600 !important;
+}
+.nav-cta:hover { background: rgba(0,180,216,0.1) !important; box-shadow: 0 0 20px rgba(0,180,216,0.2) !important; }
+.nav-cta::after { display: none !important; }
+
+.hero {
+  position: relative; min-height: 100vh;
+  display: flex; align-items: center;
+  padding: 120px 6% 80px; z-index: 1;
+}
+
+.hero-left { max-width: 640px; }
+
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(0,180,216,0.08); border: 1px solid var(--border2);
+  border-radius: 999px; padding: 7px 18px;
+  font-family: var(--mono); font-size: 11px;
+  color: var(--cyan); letter-spacing: 1px;
+  margin-bottom: 32px;
+  animation: fadeUp 0.6s 0.1s both;
+}
+.hero-tag-dot {
+  width: 7px; height: 7px;
+  background: var(--cyan); border-radius: 50%;
+  box-shadow: 0 0 8px var(--cyan);
+  animation: blink 2s infinite;
+}
+@keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+
+h1 {
+  font-size: clamp(2.8rem, 5.5vw, 4.8rem);
+  font-weight: 900; line-height: 1.05;
+  letter-spacing: -2px; margin-bottom: 8px;
+  animation: fadeUp 0.6s 0.2s both;
+}
+h1 .line1 { color: var(--text); display: block; }
+h1 .line2 {
+  display: block;
+  background: linear-gradient(90deg, var(--cyan), var(--purple));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-size: 18px; color: var(--muted); font-weight: 300;
+  max-width: 520px; line-height: 1.8;
+  margin: 24px 0 40px;
+  animation: fadeUp 0.6s 0.3s both;
+}
+
+.hero-btns { display: flex; gap: 16px; flex-wrap: wrap; animation: fadeUp 0.6s 0.4s both; }
+
+.btn-primary {
+  background: var(--cyan); color: var(--navy);
+  padding: 14px 32px; border-radius: 8px;
+  font-size: 15px; font-weight: 700; text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 0 30px rgba(0,180,216,0.35);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 50px rgba(0,180,216,0.5); }
+
+.btn-ghost {
+  background: transparent; color: var(--muted);
+  padding: 14px 32px; border-radius: 8px;
+  border: 1px solid var(--border2);
+  font-size: 15px; font-weight: 500; text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-ghost:hover { border-color: var(--cyan); color: var(--text); }
+
+.hero-metrics {
+  display: flex; gap: 48px;
+  margin-top: 64px; padding-top: 40px;
+  border-top: 1px solid var(--border);
+  animation: fadeUp 0.6s 0.5s both;
+}
+.metric-val { font-size: 30px; font-weight: 800; color: var(--cyan); letter-spacing: -1px; line-height: 1; }
+.metric-label { font-size: 12px; color: var(--dim); margin-top: 4px; font-weight: 500; letter-spacing: 0.5px; }
+
+.hero-right {
+  position: absolute; right: 4%; top: 50%;
+  transform: translateY(-50%);
+  width: 420px; height: 420px;
+  animation: fadeUp 0.8s 0.4s both;
+}
+
+.hero-ring {
+  position: absolute; border-radius: 50%;
+  border: 1px solid;
+  animation: spin linear infinite;
+}
+.ring-1 { inset: 0; border-color: rgba(0,180,216,0.15); animation-duration: 30s; }
+.ring-2 { inset: 40px; border-color: rgba(139,92,246,0.12); animation-duration: 20s; animation-direction: reverse; }
+.ring-3 { inset: 80px; border-color: rgba(0,180,216,0.1); animation-duration: 40s; }
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+.ring-dot {
+  position: absolute; width: 8px; height: 8px;
+  border-radius: 50%; background: var(--cyan);
+  box-shadow: 0 0 12px var(--cyan);
+  top: -4px; left: 50%; transform: translateX(-50%);
+}
+.ring-dot-purple { background: var(--purple); box-shadow: 0 0 12px var(--purple); }
+.ring-dot-orange { background: var(--orange); box-shadow: 0 0 12px var(--orange); }
+
+.hero-center-box {
+  position: absolute; inset: 120px;
+  background: var(--card); border: 1px solid var(--border2);
+  border-radius: 20px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 8px;
+  backdrop-filter: blur(10px);
+}
+.hero-center-n {
+  font-size: 64px; font-weight: 900;
+  background: linear-gradient(135deg, var(--cyan), var(--purple));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; line-height: 1; letter-spacing: -3px;
+}
+.hero-center-label { font-family: var(--mono); font-size: 10px; color: var(--dim); letter-spacing: 2px; }
+
+section { position: relative; z-index: 1; padding: 100px 6%; }
+
+.sec-label {
+  font-family: var(--mono); font-size: 11px; color: var(--cyan);
+  letter-spacing: 3px; text-transform: uppercase;
+  margin-bottom: 14px; display: flex; align-items: center; gap: 10px;
+}
+.sec-label::before { content: ''; width: 24px; height: 1px; background: var(--cyan); }
+
+.sec-title { font-size: clamp(1.9rem, 3vw, 2.8rem); font-weight: 800; letter-spacing: -1px; line-height: 1.1; margin-bottom: 16px; }
+.sec-sub { font-size: 17px; color: var(--muted); font-weight: 300; max-width: 520px; line-height: 1.75; margin-bottom: 56px; }
+
+#about { background: var(--navy2); }
+
+.about-wrap {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: center;
+  max-width: 1140px; margin: 0 auto;
+}
+
+.about-list { list-style: none; display: flex; flex-direction: column; gap: 16px; margin-top: 32px; }
+.about-item {
+  display: flex; align-items: flex-start; gap: 16px;
+  padding: 16px 20px;
+  background: rgba(0,180,216,0.04); border: 1px solid var(--border);
+  border-radius: 10px; transition: border-color 0.2s, background 0.2s;
+}
+.about-item:hover { border-color: var(--border2); background: rgba(0,180,216,0.07); }
+.about-item-icon {
+  width: 36px; height: 36px; flex-shrink: 0;
+  border-radius: 8px; display: flex; align-items: center; justify-content: center;
+}
+.ic-cyan { background: rgba(0,180,216,0.12); }
+.ic-purple { background: rgba(139,92,246,0.12); }
+.ic-orange { background: rgba(255,107,53,0.12); }
+.ic-green { background: rgba(0,200,100,0.12); }
+.about-item-icon svg { width: 18px; height: 18px; fill: none; stroke-width: 2; }
+.ic-cyan svg { stroke: var(--cyan); }
+.ic-purple svg { stroke: var(--purple); }
+.ic-orange svg { stroke: var(--orange); }
+.ic-green svg { stroke: #00C864; }
+.about-item-text { font-size: 14px; color: var(--muted); line-height: 1.6; }
+.about-item-text strong { color: var(--text); font-weight: 600; display: block; margin-bottom: 2px; }
+
+.about-panel { background: var(--card); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; }
+.panel-header {
+  background: rgba(0,180,216,0.06); border-bottom: 1px solid var(--border);
+  padding: 16px 24px; display: flex; align-items: center; gap: 8px;
+}
+.panel-dot { width: 10px; height: 10px; border-radius: 50%; }
+.pd-red { background: #FF5F57; } .pd-yellow { background: #FFBD2E; } .pd-green { background: #28C840; }
+.panel-title { font-family: var(--mono); font-size: 12px; color: var(--dim); margin-left: 8px; }
+.panel-body { padding: 28px 24px; display: flex; flex-direction: column; gap: 20px; }
+.panel-section-label { font-family: var(--mono); font-size: 10px; color: var(--dim); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+.tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
+.ptag { padding: 5px 13px; border-radius: 6px; font-size: 12px; font-weight: 600; font-family: var(--mono); }
+.ptag-cyan { background: rgba(0,180,216,0.12); color: var(--cyan); border: 1px solid rgba(0,180,216,0.2); }
+.ptag-purple { background: rgba(139,92,246,0.1); color: #A78BFA; border: 1px solid rgba(139,92,246,0.2); }
+.ptag-orange { background: rgba(255,107,53,0.1); color: #FF8C60; border: 1px solid rgba(255,107,53,0.2); }
+
+#apps { background: var(--navy); }
+.apps-inner { max-width: 1140px; margin: 0 auto; }
+.apps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
+
+.app-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 18px; padding: 36px 32px;
+  position: relative; overflow: hidden;
+  transition: transform 0.3s, border-color 0.3s;
+}
+.app-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  opacity: 0; transition: opacity 0.3s;
+}
+.app-card-cyan::before { background: linear-gradient(90deg, transparent, var(--cyan), transparent); }
+.app-card-purple::before { background: linear-gradient(90deg, transparent, var(--purple), transparent); }
+.app-card:hover { transform: translateY(-6px); border-color: var(--border2); }
+.app-card:hover::before { opacity: 1; }
+
+.app-card-glow {
+  position: absolute; top: -60px; right: -60px;
+  width: 180px; height: 180px; border-radius: 50%;
+  filter: blur(60px); opacity: 0; transition: opacity 0.3s; pointer-events: none;
+}
+.app-card:hover .app-card-glow { opacity: 1; }
+.app-card-cyan .app-card-glow { background: rgba(0,180,216,0.12); }
+.app-card-purple .app-card-glow { background: rgba(139,92,246,0.12); }
+
+.app-icon { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 22px; }
+.app-icon-cyan { background: rgba(0,180,216,0.12); border: 1px solid rgba(0,180,216,0.25); }
+.app-icon-purple { background: rgba(139,92,246,0.12); border: 1px solid rgba(139,92,246,0.25); }
+.app-icon svg { width: 24px; height: 24px; fill: none; stroke-width: 1.8; }
+.app-icon-cyan svg { stroke: var(--cyan); }
+.app-icon-purple svg { stroke: var(--purple); }
+
+.app-badge { display: inline-block; font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 1px; padding: 3px 10px; border-radius: 4px; margin-bottom: 12px; }
+.badge-cyan { background: rgba(0,180,216,0.1); color: var(--cyan); }
+.badge-purple { background: rgba(139,92,246,0.1); color: #A78BFA; }
+
+.app-card h3 { font-size: 19px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 12px; color: var(--text); }
+.app-card p { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 22px; }
+
+.app-feats { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 28px; }
+.app-feats li { font-size: 13px; color: var(--dim); padding-left: 18px; position: relative; line-height: 1.5; }
+.app-feats li::before { content: '›'; position: absolute; left: 0; font-size: 16px; line-height: 1.3; }
+.app-card-cyan .app-feats li::before { color: var(--cyan); }
+.app-card-purple .app-feats li::before { color: var(--purple); }
+
+.app-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 22px; border-top: 1px solid var(--border); }
+.app-links { display: flex; gap: 16px; }
+.app-link {
+  font-size: 12px; font-weight: 600; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 5px;
+  transition: gap 0.2s; font-family: var(--mono); letter-spacing: 0.5px;
+}
+.app-link:hover { gap: 9px; }
+.link-cyan { color: var(--cyan); }
+.link-purple { color: #A78BFA; }
+.link-ghost { color: var(--dim); }
+.link-ghost:hover { color: var(--muted); }
+.app-link svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2.5; }
+
+#why { background: var(--navy2); }
+.why-inner { max-width: 1140px; margin: 0 auto; }
+.why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+
+.why-card {
+  background: rgba(10,22,40,0.7); border: 1px solid var(--border);
+  border-radius: 14px; padding: 32px 28px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.why-card:hover { border-color: var(--border2); transform: translateY(-3px); }
+.why-num { font-family: var(--mono); font-size: 11px; color: var(--dim); letter-spacing: 2px; margin-bottom: 20px; }
+.why-icon-wrap {
+  width: 44px; height: 44px; border-radius: 12px;
+  background: rgba(0,180,216,0.08); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center; margin-bottom: 16px;
+}
+.why-icon-wrap svg { width: 20px; height: 20px; stroke: var(--cyan); fill: none; stroke-width: 1.8; }
+.why-card h4 { font-size: 16px; font-weight: 700; margin-bottom: 10px; color: var(--text); letter-spacing: -0.3px; }
+.why-card p { font-size: 13px; color: var(--dim); line-height: 1.65; }
+
+#contact { background: var(--navy3); }
+.contact-inner { max-width: 740px; margin: 0 auto; text-align: center; }
+
+.contact-card {
+  margin-top: 48px; background: var(--card);
+  border: 1px solid var(--border2); border-radius: 24px;
+  padding: 56px 48px; position: relative; overflow: hidden;
+}
+.contact-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 50%; transform: translateX(-50%);
+  width: 60%; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+}
+.contact-glow {
+  position: absolute; top: -80px; left: 50%; transform: translateX(-50%);
+  width: 400px; height: 200px;
+  background: radial-gradient(ellipse, rgba(0,180,216,0.1), transparent 70%);
+  pointer-events: none;
+}
+.contact-email-wrap {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: rgba(0,180,216,0.06); border: 1px solid var(--border2);
+  border-radius: 12px; padding: 16px 28px; margin-bottom: 24px;
+  text-decoration: none;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.contact-email-wrap:hover { background: rgba(0,180,216,0.1); box-shadow: 0 0 40px rgba(0,180,216,0.15); }
+.contact-email { font-size: 20px; font-weight: 700; color: var(--cyan); letter-spacing: -0.5px; }
+.email-icon { width: 20px; height: 20px; stroke: var(--cyan); fill: none; stroke-width: 1.8; }
+.contact-note { font-size: 15px; color: var(--muted); font-weight: 300; line-height: 1.75; max-width: 500px; margin: 0 auto 36px; }
+
+.platform-row { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+.plat-btn {
+  display: flex; align-items: center; gap: 10px;
+  background: rgba(0,180,216,0.05); border: 1px solid var(--border);
+  border-radius: 10px; padding: 12px 22px;
+  font-size: 13px; font-weight: 600; color: var(--muted);
+  text-decoration: none; transition: border-color 0.2s, color 0.2s, background 0.2s;
+  font-family: var(--mono);
+}
+.plat-btn:hover { border-color: var(--cyan); color: var(--cyan); background: rgba(0,180,216,0.08); }
+.plat-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 6px var(--cyan); }
+
+footer {
+  position: relative; z-index: 1;
+  border-top: 1px solid var(--border); padding: 28px 6%;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 16px; background: var(--navy);
+}
+.footer-left { display: flex; align-items: center; gap: 14px; }
+.footer-logo-mark {
+  width: 28px; height: 28px;
+  background: linear-gradient(135deg, var(--cyan), var(--cyan-dim));
+  border-radius: 7px; display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 14px; color: var(--navy);
+}
+.footer-copy { font-size: 13px; color: var(--dim); }
+.footer-copy a { color: var(--cyan); text-decoration: none; }
+.footer-links { display: flex; gap: 28px; list-style: none; }
+.footer-links a { font-size: 13px; color: var(--dim); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--cyan); }
+
+@keyframes fadeUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
+.reveal { opacity:0; transform:translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+@media (max-width: 900px) {
+  .hero-right { display: none; }
+  .about-wrap { grid-template-columns: 1fr; gap: 40px; }
+  .nav-links { display: none; }
+  .hero-metrics { gap: 28px; flex-wrap: wrap; }
+  .contact-card { padding: 36px 24px; }
+  footer { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">N</div>
+    <span class="nav-logo-text">ERP<span>Nexus</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#apps">Apps</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">
+      <div class="hero-tag-dot"></div>
+      ODOO &amp; ERPNEXT SPECIALISTS
+    </div>
+    <h1>
+      <span class="line1">Production-ready</span>
+      <span class="line2">ERP modules.</span>
+    </h1>
+    <p class="hero-sub">We design and build professional-grade extensions for Odoo and ERPNext — battle-tested in real business environments before they ever reach the app store.</p>
+    <div class="hero-btns">
+      <a href="#apps" class="btn-primary">Browse Our Apps</a>
+      <a href="#contact" class="btn-ghost">Get in Touch →</a>
+    </div>
+    <div class="hero-metrics">
+      <div><div class="metric-val">2+</div><div class="metric-label">Published Apps</div></div>
+      <div><div class="metric-val">Odoo 18</div><div class="metric-label">Latest Support</div></div>
+      <div><div class="metric-val">ERPNext</div><div class="metric-label">Also Covered</div></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-ring ring-1"><div class="ring-dot"></div></div>
+    <div class="hero-ring ring-2"><div class="ring-dot ring-dot-purple"></div></div>
+    <div class="hero-ring ring-3"><div class="ring-dot ring-dot-orange"></div></div>
+    <div class="hero-center-box">
+      <div class="hero-center-n">N</div>
+      <div class="hero-center-label">ERPNEXUS</div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="about-wrap">
+    <div class="reveal">
+      <div class="sec-label">Who we are</div>
+      <h2 class="sec-title">Built by ERP developers,<br>for ERP users</h2>
+      <p style="color:var(--muted);font-size:16px;line-height:1.8;max-width:480px;">ERPNexus is a specialist ERP development studio. Every module we publish is deployed and stress-tested in live production environments — not demos.</p>
+      <ul class="about-list">
+        <li class="about-item">
+          <div class="about-item-icon ic-cyan"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="about-item-text"><strong>Live-tested on Odoo 18 Enterprise</strong>Every app verified on real deployments before release</div>
+        </li>
+        <li class="about-item">
+          <div class="about-item-icon ic-purple"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+          <div class="about-item-text"><strong>Clean code, proper ORM</strong>No hacks, no monkey-patching, no hidden overrides</div>
+        </li>
+        <li class="about-item">
+          <div class="about-item-icon ic-orange"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+          <div class="about-item-text"><strong>Full technical support</strong>We respond to every issue, bug report, and question</div>
+        </li>
+        <li class="about-item">
+          <div class="about-item-icon ic-green"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+          <div class="about-item-text"><strong>Custom development available</strong>Need something specific? We build it for you</div>
+        </li>
+      </ul>
+    </div>
+    <div class="reveal">
+      <div class="about-panel">
+        <div class="panel-header">
+          <div class="panel-dot pd-red"></div>
+          <div class="panel-dot pd-yellow"></div>
+          <div class="panel-dot pd-green"></div>
+          <span class="panel-title">nexus_stack.config</span>
+        </div>
+        <div class="panel-body">
+          <div>
+            <div class="panel-section-label">// Platforms</div>
+            <div class="tag-cloud">
+              <span class="ptag ptag-cyan">Odoo 16</span>
+              <span class="ptag ptag-cyan">Odoo 17</span>
+              <span class="ptag ptag-cyan">Odoo 18</span>
+              <span class="ptag ptag-purple">ERPNext v14</span>
+              <span class="ptag ptag-purple">ERPNext v15</span>
+            </div>
+          </div>
+          <div style="height:1px;background:var(--border)"></div>
+          <div>
+            <div class="panel-section-label">// Tech stack</div>
+            <div class="tag-cloud">
+              <span class="ptag ptag-cyan">Python ORM</span>
+              <span class="ptag ptag-cyan">OWL 3</span>
+              <span class="ptag ptag-cyan">QWeb</span>
+              <span class="ptag ptag-purple">PostgreSQL</span>
+              <span class="ptag ptag-orange">REST API</span>
+              <span class="ptag ptag-orange">XML Views</span>
+            </div>
+          </div>
+          <div style="height:1px;background:var(--border)"></div>
+          <div>
+            <div class="panel-section-label">// Domains</div>
+            <div class="tag-cloud">
+              <span class="ptag ptag-cyan">Manufacturing</span>
+              <span class="ptag ptag-purple">Sales</span>
+              <span class="ptag ptag-cyan">Accounting</span>
+              <span class="ptag ptag-orange">Inventory</span>
+              <span class="ptag ptag-purple">E-commerce</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="apps">
+  <div class="apps-inner">
+    <div class="reveal">
+      <div class="sec-label">Our apps</div>
+      <h2 class="sec-title">Purpose-built Odoo modules</h2>
+      <p class="sec-sub">Every module solves a real problem found in production. No bloat, no unnecessary dependencies.</p>
+    </div>
+    <div class="apps-grid">
+
+      <div class="app-card app-card-cyan reveal">
+        <div class="app-card-glow"></div>
+        <div class="app-icon app-icon-cyan">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <span class="app-badge badge-cyan">ODOO 18 · WEBSITE</span>
+        <h3>Website Email Verification</h3>
+        <p>Adds OTP-based email verification to the Odoo website registration flow. Prevents fake accounts and ensures every customer has a confirmed, valid email address.</p>
+        <ul class="app-feats">
+          <li>OTP sent on signup — required before account activation</li>
+          <li>Configurable expiry time and resend limit</li>
+          <li>Works with Odoo native website portal</li>
+          <li>Pure OWL + Python — no frontend dependencies</li>
+        </ul>
+        <div class="app-footer">
+          <div class="app-links">
+            <a href="https://apps.odoo.com" class="app-link link-cyan" target="_blank">
+              Odoo Apps <svg viewBox="0 0 14 14"><path d="M3 7h8M7 3l4 4-4 4"/></svg>
+            </a>
+            <a href="https://github.com/NexusERPTech/website-email-verification" class="app-link link-ghost" target="_blank">
+              GitHub <svg viewBox="0 0 14 14"><path d="M3 7h8M7 3l4 4-4 4"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="app-card app-card-purple reveal">
+        <div class="app-card-glow"></div>
+        <div class="app-icon app-icon-purple">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <span class="app-badge badge-purple">ODOO 18 · ACCOUNTING</span>
+        <h3>Invoice Overdue Block</h3>
+        <p>Automatically blocks sales order confirmation for customers with overdue invoices. Enforces credit control at the point of sale — no manual checking needed.</p>
+        <ul class="app-feats">
+          <li>Blocks SO confirmation on overdue accounts</li>
+          <li>Configurable grace period and overdue threshold</li>
+          <li>Clear warning showing overdue invoice details</li>
+          <li>Manager override with full audit trail</li>
+        </ul>
+        <div class="app-footer">
+          <div class="app-links">
+            <a href="https://apps.odoo.com" class="app-link link-purple" target="_blank">
+              Odoo Apps <svg viewBox="0 0 14 14"><path d="M3 7h8M7 3l4 4-4 4"/></svg>
+            </a>
+            <a href="https://github.com/NexusERPTech/invoice-overdue-block" class="app-link link-ghost" target="_blank">
+              GitHub <svg viewBox="0 0 14 14"><path d="M3 7h8M7 3l4 4-4 4"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="why-inner">
+    <div class="reveal">
+      <div class="sec-label">Why ERPNexus</div>
+      <h2 class="sec-title">What sets our work apart</h2>
+      <p class="sec-sub">We are not a module factory. Every release has been through real deployment pressure.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-num">// 01</div>
+        <div class="why-icon-wrap"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <h4>Production-first</h4>
+        <p>Every module is developed against a live Odoo Enterprise instance and stress-tested before publication.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-num">// 02</div>
+        <div class="why-icon-wrap"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+        <h4>Clean architecture</h4>
+        <p>Our modules do one thing well. No unnecessary dependencies, no core overrides, no technical debt.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-num">// 03</div>
+        <div class="why-icon-wrap"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+        <h4>Odoo 18 native</h4>
+        <p>All apps written for Odoo 18 from day one — OWL 3, current ORM patterns, latest view architecture.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-num">// 04</div>
+        <div class="why-icon-wrap"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+        <h4>ERPNext too</h4>
+        <p>We develop for both ecosystems. On Frappe / ERPNext? We can build and support custom apps for your stack.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-inner">
+    <div class="reveal">
+      <div class="sec-label" style="justify-content:center">Get in touch</div>
+      <h2 class="sec-title">Work with us</h2>
+      <p style="color:var(--muted);font-size:17px;font-weight:300;line-height:1.75;">Need a custom Odoo or ERPNext module? Have a question about one of our apps? We respond to every message.</p>
+    </div>
+    <div class="contact-card reveal">
+      <div class="contact-glow"></div>
+      <a href="mailto:info@erpnexus.tech" class="contact-email-wrap">
+        <svg class="email-icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <span class="contact-email">info@erpnexus.tech</span>
+      </a>
+      <p class="contact-note">For custom development requests, include your Odoo version, what you need, and your timeline. We typically respond within 24 hours.</p>
+      <div class="platform-row">
+        <a href="https://apps.odoo.com" class="plat-btn" target="_blank">
+          <div class="plat-dot"></div>Odoo App Store
+        </a>
+        <a href="https://github.com/NexusERPTech" class="plat-btn" target="_blank">
+          <div class="plat-dot"></div>GitHub
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-left">
+    <div class="footer-logo-mark">N</div>
+    <p class="footer-copy">© 2025 ERPNexus · <a href="mailto:info@erpnexus.tech">info@erpnexus.tech</a></p>
+  </div>
+  <ul class="footer-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#apps">Apps</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</footer>
+
+<script>
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

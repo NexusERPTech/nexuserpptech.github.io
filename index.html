@@ -52,9 +52,11 @@ h1{font-size:clamp(2.6rem,5vw,4.5rem);font-weight:900;line-height:1.05;letter-sp
 .btn-p:hover{transform:translateY(-2px);box-shadow:0 0 50px rgba(0,180,216,0.5)}
 .btn-g{background:transparent;color:var(--muted);padding:13px 28px;border-radius:8px;border:1px solid var(--border2);font-size:15px;font-weight:500;text-decoration:none;transition:border-color 0.2s,color 0.2s}
 .btn-g:hover{border-color:var(--cyan);color:var(--text)}
-.hero-metrics{display:flex;gap:40px;margin-top:56px;padding-top:36px;border-top:1px solid var(--border);animation:fadeUp 0.6s 0.5s both;flex-wrap:wrap}
-.mv{font-size:28px;font-weight:800;color:var(--cyan);letter-spacing:-1px;line-height:1}
-.ml{font-size:11px;color:var(--dim);margin-top:4px;font-weight:500;letter-spacing:0.5px;transition:color var(--tr)}
+.hero-metrics{display:flex;gap:0;margin-top:56px;padding-top:36px;border-top:1px solid var(--border);animation:fadeUp 0.6s 0.5s both;flex-wrap:wrap}
+.hm-item{padding:0 32px 0 0;margin-right:32px;border-right:1px solid var(--border);position:relative}
+.hm-item:last-child{border-right:none;margin-right:0;padding-right:0}
+.mv{font-size:32px;font-weight:900;letter-spacing:-2px;line-height:1;background:linear-gradient(135deg,var(--cyan),rgba(0,180,216,0.7));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.ml{font-size:10px;color:var(--dim);margin-top:6px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;transition:color var(--tr)}
 .hero-right{position:absolute;right:4%;top:50%;transform:translateY(-50%);width:400px;height:400px;animation:fadeUp 0.8s 0.4s both}
 .hr{position:absolute;border-radius:50%;border:1px solid;animation:spin linear infinite}
 .hr1{inset:0;border-color:rgba(0,180,216,0.15);animation-duration:30s}
@@ -64,7 +66,7 @@ h1{font-size:clamp(2.6rem,5vw,4.5rem);font-weight:900;line-height:1.05;letter-sp
 .rdot{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 12px var(--cyan);top:-4px;left:50%;transform:translateX(-50%)}
 .rdot-p{background:var(--purple);box-shadow:0 0 12px var(--purple)}
 .rdot-o{background:var(--orange);box-shadow:0 0 12px var(--orange)}
-.hero-box{position:absolute;inset:115px;background:var(--card);border:1px solid var(--border2);border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;backdrop-filter:blur(10px);overflow:hidden;transition:background var(--tr)}
+.hero-box{position:absolute;inset:115px;background:var(--card);border:2px solid rgba(0,180,216,0.5);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;backdrop-filter:blur(10px);overflow:hidden;transition:background var(--tr),box-shadow var(--tr);box-shadow:0 0 40px rgba(0,180,216,0.4),0 0 80px rgba(0,180,216,0.2),0 0 140px rgba(0,180,216,0.1);animation:sunPulse 3s ease-in-out infinite}@keyframes sunPulse{0%,100%{box-shadow:0 0 40px rgba(0,180,216,0.4),0 0 80px rgba(0,180,216,0.2),0 0 140px rgba(0,180,216,0.1)}50%{box-shadow:0 0 70px rgba(0,180,216,0.6),0 0 120px rgba(0,180,216,0.3),0 0 200px rgba(0,180,216,0.15)}}
 .hero-box-logo{width:90px;height:90px;object-fit:contain;border-radius:12px;background:rgba(255,255,255,0.9);padding:6px}
 .hero-box-label{font-family:var(--mono);font-size:9px;color:var(--dim);letter-spacing:2px;transition:color var(--tr)}
 section{position:relative;z-index:1;padding:96px 5%}
@@ -234,16 +236,16 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:24
   <div class="hero-left">
     <div class="hero-tag"><div class="hero-dot"></div>ODOO &amp; ERPNEXT SPECIALISTS</div>
     <h1><span class="l1">Production-ready</span><span class="l2">ERP solutions.</span></h1>
-    <p class="hero-sub">We design, build, and deploy professional-grade Odoo and ERPNext modules and full ERP systems — battle-tested in real business environments.</p>
+    <p class="hero-sub">We design, build, rebrand, and deploy professional-grade Odoo and ERPNext modules and full ERP systems — battle-tested in real business environments.</p>
     <div class="hero-btns">
       <a href="#apps" class="btn-p">Browse Our Apps</a>
       <a href="#contact" class="btn-g">Get in Touch →</a>
     </div>
     <div class="hero-metrics">
-      <div><div class="mv">6+</div><div class="ml">Apps in Pipeline</div></div>
-      <div><div class="mv">4+</div><div class="ml">ERP Deployments</div></div>
-      <div><div class="mv">Odoo 18</div><div class="ml">Latest Support</div></div>
-      <div><div class="mv">ERPNext</div><div class="ml">Also Covered</div></div>
+      <div class="hm-item"><div class="mv">12+</div><div class="ml">Apps Built &amp; Rebranded</div></div>
+      <div class="hm-item"><div class="mv">6+</div><div class="ml">Apps in Pipeline</div></div>
+      <div class="hm-item"><div class="mv">4+</div><div class="ml">ERP Deployments</div></div>
+      <div class="hm-item"><div class="mv">Odoo 18</div><div class="ml">Latest Support</div></div>
     </div>
   </div>
   <div class="hero-right">
@@ -392,14 +394,14 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:24
         <div class="pcard">
           <div class="ptop">
             <div class="pavatar">A</div>
-            <div><div class="pname">Ali Ibrahim</div><div class="phandle">@Alexis_Dali · ERP Developer</div></div>
+            <div><div class="pname">Ali Ibrahim</div><div class="phandle">ERP &amp; App Developer</div></div>
           </div>
           <div class="plinks">
             <a href="mailto:alexis.ibrahim.sy@gmail.com" class="plink"><div class="plink-icon pli-c"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><span class="plink-txt">alexis.ibrahim.sy@gmail.com</span></a>
             <a href="https://linkedin.com/in/ali-ibrahem-" class="plink" target="_blank"><div class="plink-icon pli-b"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div><span class="plink-txt">linkedin.com/in/ali-ibrahem-</span></a>
             <a href="https://t.me/+yXPdmp7dzHIyYTIy" class="plink" target="_blank"><div class="plink-icon pli-tg"><svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></svg></div><span class="plink-txt">Telegram · Nexus ERP Tech</span></a>
             <a href="https://discuss.frappe.io/u/Alexis_Dali" class="plink" target="_blank"><div class="plink-icon pli-o"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><span class="plink-txt">ERPNext Forum · Alexis_Dali</span></a>
-            <a href="https://github.com/NexusERPTech" class="plink" target="_blank"><div class="plink-icon pli-gh"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></div><span class="plink-txt">github.com/NexusERPTech</span></a>
+            
           </div>
         </div>
       </div>

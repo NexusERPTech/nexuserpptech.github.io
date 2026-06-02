@@ -252,6 +252,33 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:24
 @media(max-width:960px){.hero-right{display:none}.about-wrap{grid-template-columns:1fr;gap:40px}.comm-grid{grid-template-columns:1fr}.nav-links{display:none}.hero-metrics{gap:24px}.ccard{padding:36px 22px}footer{flex-direction:column;text-align:center}}
 @media(max-width:600px){.stats-row{grid-template-columns:repeat(2,1fr)}.proj-grid{grid-template-columns:1fr}.back-top{bottom:20px;right:20px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important}}
+/* ── INTEGRATIONS ─────────────────────────────────────── */
+.int-ready-banner{display:flex;align-items:flex-start;gap:20px;background:linear-gradient(135deg,rgba(0,180,216,0.08),rgba(139,92,246,0.06));border:1px solid var(--border2);border-radius:16px;padding:28px 32px;margin-bottom:48px}
+.int-ready-icon{font-size:32px;flex-shrink:0;margin-top:2px}
+.int-ready-banner strong{font-size:17px;font-weight:700;color:var(--cyan);display:block;margin-bottom:6px}
+.int-ready-banner p{color:var(--muted);font-size:14px;line-height:1.7;margin:0}
+.int-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+.int-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:16px;transition:border-color 0.3s,transform 0.3s,box-shadow 0.3s;backdrop-filter:blur(10px)}
+.int-card:hover{border-color:var(--border2);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,180,216,0.1)}
+.int-card-head{display:flex;align-items:center;gap:16px}
+.int-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.int-icon--cyan{background:rgba(0,180,216,0.12)}
+.int-icon--purple{background:rgba(139,92,246,0.12)}
+.int-icon--orange{background:rgba(255,107,53,0.12)}
+.int-card-head h3{font-size:16px;font-weight:700;color:var(--text);margin-bottom:4px}
+.int-badge{font-size:10px;font-weight:600;padding:3px 10px;border-radius:20px;letter-spacing:0.5px;text-transform:uppercase}
+.int-badge--cyan{background:rgba(0,180,216,0.12);color:var(--cyan)}
+.int-badge--purple{background:rgba(139,92,246,0.12);color:var(--purple)}
+.int-badge--orange{background:rgba(255,107,53,0.12);color:var(--orange)}
+.int-card>p{color:var(--muted);font-size:14px;line-height:1.7;flex:1}
+.int-features{display:flex;flex-wrap:wrap;gap:8px}
+.int-features span{font-size:11px;font-weight:500;padding:4px 12px;border-radius:20px;background:var(--tag-c);color:var(--cyan);border:1px solid rgba(0,180,216,0.15)}
+.int-video-link{margin-top:4px}
+.int-yt-btn{display:inline-flex;align-items:center;gap:8px;background:#FF0000;color:#fff;font-size:13px;font-weight:600;padding:9px 18px;border-radius:8px;text-decoration:none;transition:opacity 0.2s,transform 0.2s}
+.int-yt-btn:hover{opacity:0.88;transform:translateY(-1px)}
+.int-coming{font-size:13px;color:var(--muted)}
+.int-coming a{color:var(--cyan);text-decoration:none}
+.int-coming a:hover{text-decoration:underline}
 </style>
 </head>
 <body>
@@ -266,6 +293,7 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:24
     <li><a href="#about">About</a></li>
     <li><a href="#apps">Apps</a></li>
     <li><a href="#projects">Projects</a></li>
+    <li><a href="#integrations">Integrations</a></li>
     <li><a href="#community">Community</a></li>
     <li><a href="#contact" class="nav-cta">Contact</a></li>
   </ul>
@@ -472,6 +500,107 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:24
         <a href="https://linkedin.com/in/ali-ibrahem-" class="pbtn" target="_blank"><div class="pdot"></div>LinkedIn</a>
         <a href="https://t.me/+yXPdmp7dzHIyYTIy" class="pbtn" target="_blank"><div class="pdot"></div>Telegram</a>
       </div>
+    </div>
+  </div>
+</section>
+  <!-- INTEGRATIONS -->
+<section id="integrations" class="section">
+  <div class="section-inner">
+    <div class="section-hd reveal">
+      <span class="section-label">Capabilities</span>
+      <h2>Integration <span class="grad">Expertise</span></h2>
+      <p class="section-sub">From payment gateways to CDN pipelines — we architect clean, production-grade integrations that slot seamlessly into any ERP or web platform.</p>
+    </div>
+
+    <!-- Ready badge -->
+    <div class="int-ready-banner reveal">
+      <div class="int-ready-icon">⚡</div>
+      <div>
+        <strong>Integration-Ready Engineers</strong>
+        <p>Senior-level experience across payment processors, OTP providers, storage networks, and third-party APIs. Zero vendor lock-in. Every integration is documented, testable, and built to scale.</p>
+      </div>
+    </div>
+
+    <div class="int-grid">
+
+      <!-- Payment -->
+      <div class="int-card reveal">
+        <div class="int-card-head">
+          <div class="int-icon int-icon--cyan">💳</div>
+          <div>
+            <h3>Payment Gateway Integration</h3>
+            <span class="int-badge int-badge--cyan">Production Ready</span>
+          </div>
+        </div>
+        <p>Full-cycle payment gateway integration including card payments, QR code-based payments, transaction callbacks, and reconciliation — wired directly into Odoo invoicing and eCommerce flows.</p>
+        <div class="int-features">
+          <span>Card Payments</span><span>QR Code Pay</span><span>Webhooks</span><span>Odoo Integration</span>
+        </div>
+        <div class="int-video-link">
+          <a href="https://youtu.be/h_m20YOPs3E" target="_blank" class="int-yt-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Watch Demo on YouTube
+          </a>
+        </div>
+      </div>
+
+      <!-- OTP -->
+      <div class="int-card reveal">
+        <div class="int-card-head">
+          <div class="int-icon int-icon--purple">📱</div>
+          <div>
+            <h3>OTP Verification</h3>
+            <span class="int-badge int-badge--purple">Production Ready</span>
+          </div>
+        </div>
+        <p>SMS-based OTP integration for user verification, eCommerce checkout confirmation, and account security flows. Plugged into both Laravel and Odoo backends with clean provider abstraction.</p>
+        <div class="int-features">
+          <span>SMS OTP</span><span>Laravel</span><span>Odoo</span><span>eCommerce Auth</span>
+        </div>
+        <div class="int-video-link">
+          <a href="https://youtu.be/y0WOSVzL4l4" target="_blank" class="int-yt-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Watch Demo on YouTube
+          </a>
+        </div>
+      </div>
+
+      <!-- CDN -->
+      <div class="int-card reveal">
+        <div class="int-card-head">
+          <div class="int-icon int-icon--orange">🌐</div>
+          <div>
+            <h3>CDN Storage Integration</h3>
+            <span class="int-badge int-badge--orange">Production Ready</span>
+          </div>
+        </div>
+        <p>High-performance CDN integration for media storage, image delivery, and file management. Custom Laravel filesystem adapters for seamless upload pipelines — no rewrite of existing app logic required.</p>
+        <div class="int-features">
+          <span>Media Storage</span><span>Laravel Adapter</span><span>Image Proxy</span><span>Fast Delivery</span>
+        </div>
+        <div class="int-video-link">
+          <span class="int-coming">🎬 Video coming soon</span>
+        </div>
+      </div>
+
+      <!-- Custom API -->
+      <div class="int-card reveal">
+        <div class="int-card-head">
+          <div class="int-icon int-icon--cyan">🔌</div>
+          <div>
+            <h3>Custom API & Third-Party</h3>
+            <span class="int-badge int-badge--cyan">Available</span>
+          </div>
+        </div>
+        <p>Any REST or webhook-based integration you need — shipping providers, HR systems, government portals, attendance hardware, or custom data pipelines. We scope, build, and document from day one.</p>
+        <div class="int-features">
+          <span>REST APIs</span><span>Webhooks</span><span>Hardware</span><span>Gov Portals</span>
+        </div>
+        <div class="int-video-link">
+          <span class="int-coming">📩 <a href="mailto:info@erpnexus.tech">Request a consultation</a></span>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>

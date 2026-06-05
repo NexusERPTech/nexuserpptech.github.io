@@ -476,6 +476,9 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:24
     </div>
   </div>
 </section>
+<!-- ============================================================
+     INTEGRATIONS SECTION — replace your existing <section id="integrations"> entirely
+     ============================================================ -->
 <section id="integrations">
   <div class="comm-inner">
     <div class="reveal">
@@ -483,6 +486,7 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:24
       <h2 class="st">Integration <span style="background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Expertise</span></h2>
       <p class="ss">From payment gateways to CDN pipelines — we architect clean, production-grade integrations that slot seamlessly into any ERP or web platform.</p>
     </div>
+
     <div class="int-ready-banner reveal">
       <div class="int-ready-icon">⚡</div>
       <div>
@@ -490,8 +494,11 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:24
         <p>Senior-level experience across payment processors, OTP providers, storage networks, and third-party APIs. Zero vendor lock-in. Every integration is documented, testable, and built to scale.</p>
       </div>
     </div>
+
     <div class="int-grid">
-      <div class="int-card reveal">
+
+      <!-- Payment Gateway -->
+      <div class="int-card int-card--cyan reveal">
         <div class="int-card-head">
           <div class="int-icon int-icon--cyan">💳</div>
           <div>
@@ -499,7 +506,7 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:24
             <span class="int-badge int-badge--cyan">Production Ready</span>
           </div>
         </div>
-        <p>Full-cycle payment gateway integration including card payments, QR code-based payments, transaction callbacks, and reconciliation — wired directly into Odoo invoicing and eCommerce flows.</p>
+        <p>Full-cycle payment integration including card payments, QR code-based payments, transaction callbacks, and reconciliation — wired directly into Odoo invoicing and eCommerce flows.</p>
         <div class="int-features">
           <span>Card Payments</span><span>QR Code Pay</span><span>Webhooks</span><span>Odoo Integration</span>
         </div>
@@ -510,7 +517,9 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:24
           </a>
         </div>
       </div>
-      <div class="int-card reveal">
+
+      <!-- OTP Verification -->
+      <div class="int-card int-card--violet reveal">
         <div class="int-card-head">
           <div class="int-icon int-icon--purple">📱</div>
           <div>
@@ -518,9 +527,9 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:24
             <span class="int-badge int-badge--purple">Production Ready</span>
           </div>
         </div>
-        <p>SMS-based OTP integration for user verification, eCommerce checkout confirmation, and account security flows. Plugged into both Laravel and Odoo backends with clean provider abstraction.</p>
+        <p>SMS and WhatsApp OTP for user verification, checkout confirmation, and account security. Plugged into both Laravel and Odoo backends with clean provider abstraction.</p>
         <div class="int-features">
-          <span>SMS OTP</span><span>Laravel</span><span>Odoo</span><span>eCommerce Auth</span>
+          <span>SMS OTP</span><span>WhatsApp</span><span>Laravel</span><span>Odoo</span><span>eCommerce Auth</span>
         </div>
         <div class="int-video-link">
           <a href="https://youtu.be/y0WOSVzL4l4" target="_blank" class="int-yt-btn">
@@ -529,7 +538,9 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:24
           </a>
         </div>
       </div>
-      <div class="int-card reveal">
+
+      <!-- CDN Storage -->
+      <div class="int-card int-card--orange reveal">
         <div class="int-card-head">
           <div class="int-icon int-icon--orange">🌐</div>
           <div>
@@ -537,19 +548,57 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:24
             <span class="int-badge int-badge--orange">Production Ready</span>
           </div>
         </div>
-        <p>High-performance CDN integration for media storage, image delivery, and file management. Custom Laravel filesystem adapters for seamless upload pipelines — no rewrite of existing app logic required.</p>
+        <p>High-performance CDN for media storage, image delivery, and video streaming. Custom filesystem adapters for seamless upload pipelines — no rewrite of existing app logic required.</p>
         <div class="int-features">
-          <span>Media Storage</span><span>Laravel Adapter</span><span>Image Proxy</span><span>Fast Delivery</span>
+          <span>Media Storage</span><span>Video Stream</span><span>Image Proxy</span><span>Fast Delivery</span>
         </div>
         <div class="int-video-link">
           <span class="int-coming">🎬 Video coming soon</span>
         </div>
       </div>
-      <div class="int-card reveal">
+
+      <!-- Video Conferencing -->
+      <div class="int-card int-card--teal reveal">
+        <div class="int-card-head">
+          <div class="int-icon int-icon--teal">🎥</div>
+          <div>
+            <h3>Video Conferencing</h3>
+            <span class="int-badge int-badge--teal">Production Ready</span>
+          </div>
+        </div>
+        <p>Embedded real-time video conferencing integrated directly into your platform — room management, authentication tokens, and Flutter SDK support built in.</p>
+        <div class="int-features">
+          <span>Video Calls</span><span>Flutter</span><span>Room Auth</span><span>Self-Hosted</span>
+        </div>
+        <div class="int-video-link">
+          <span class="int-coming">🎬 Video coming soon</span>
+        </div>
+      </div>
+
+      <!-- Mobile App Integration -->
+      <div class="int-card int-card--pink reveal">
+        <div class="int-card-head">
+          <div class="int-icon int-icon--pink">📲</div>
+          <div>
+            <h3>Mobile App Integration</h3>
+            <span class="int-badge int-badge--pink">Production Ready</span>
+          </div>
+        </div>
+        <p>End-to-end Flutter mobile app development with push notifications, real-time remote config, and deep backend connectivity — deployed to Google Play and App Store.</p>
+        <div class="int-features">
+          <span>Flutter</span><span>Push Notifications</span><span>Remote Config</span><span>Play Store</span>
+        </div>
+        <div class="int-video-link">
+          <span class="int-coming">🎬 Video coming soon</span>
+        </div>
+      </div>
+
+      <!-- Custom API -->
+      <div class="int-card int-card--slate reveal">
         <div class="int-card-head">
           <div class="int-icon int-icon--cyan">🔌</div>
           <div>
-            <h3>Custom API & Third-Party</h3>
+            <h3>Custom API &amp; Third-Party</h3>
             <span class="int-badge int-badge--cyan">Available</span>
           </div>
         </div>
@@ -561,9 +610,50 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:24
           <span class="int-coming">📩 <a href="mailto:info@erpnexus.tech">Request a consultation</a></span>
         </div>
       </div>
+
     </div>
   </div>
 </section>
+
+<!-- ============================================================
+     NEW INT-CARD CSS — add these to your existing <style> block.
+     The color-accent stripe on top replaces the old flat header style.
+     ============================================================ -->
+<style id="int-new-styles-paste-into-existing-style-block">
+/* Top accent stripe per card color */
+.int-card { position: relative; overflow: hidden; }
+.int-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: 16px 16px 0 0;
+}
+.int-card--cyan::before   { background: linear-gradient(90deg, #06b6d4, #0ea5e9); }
+.int-card--violet::before { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
+.int-card--orange::before { background: linear-gradient(90deg, #f97316, #fb923c); }
+.int-card--teal::before   { background: linear-gradient(90deg, #14b8a6, #2dd4bf); }
+.int-card--pink::before   { background: linear-gradient(90deg, #ec4899, #f472b6); }
+.int-card--slate::before  { background: linear-gradient(90deg, #64748b, #94a3b8); }
+
+/* Teal icon bg (new) */
+.int-icon--teal { background: rgba(20,184,166,0.12); color: #0f766e; }
+
+/* Pink icon bg (new) */
+.int-icon--pink { background: rgba(236,72,153,0.12); color: #9d174d; }
+
+/* Teal badge (new) */
+.int-badge--teal {
+  background: rgba(20,184,166,0.15);
+  color: #0f766e;
+}
+
+/* Pink badge (new) */
+.int-badge--pink {
+  background: rgba(236,72,153,0.12);
+  color: #9d174d;
+}
+</style>
 <section id="why">
   <div class="why-inner">
     <div class="reveal"><div class="sl">Why ERPNexus</div><h2 class="st">What sets our work apart</h2><p class="ss">We are not a module factory. Every release has been through real deployment pressure.</p></div>

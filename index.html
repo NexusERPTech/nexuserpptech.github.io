@@ -131,6 +131,13 @@ section{position:relative;z-index:1;padding:96px 5%}
 .aic-c svg{stroke:var(--cyan)}.aic-p svg{stroke:var(--purple)}.aic-o svg{stroke:var(--orange)}.aic-g svg{stroke:#00C864}
 .abadge{display:inline-block;font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:1px;padding:3px 9px;border-radius:4px;margin-bottom:11px}
 .ab-c{background:rgba(0,180,216,0.1);color:var(--cyan)}.ab-p{background:rgba(139,92,246,0.1);color:#A78BFA}.ab-o{background:rgba(255,107,53,0.1);color:#FF8C60}.ab-g{background:rgba(0,200,100,0.1);color:#00C864}
+.ac-b::before{background:linear-gradient(90deg,transparent,#3B82F6,transparent)}
+.ac-b .aglow{background:rgba(59,130,246,0.12)}
+.ac-b .afeats li::before{color:#3B82F6}
+.aic-b{background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.25)}
+.aic-b svg{stroke:#3B82F6}
+.ab-b{background:rgba(59,130,246,0.1);color:#3B82F6}
+.lb{color:#3B82F6}
 .acard h3{font-size:17px;font-weight:700;letter-spacing:-0.4px;margin-bottom:10px;color:var(--text);transition:color var(--tr)}
 .acard p{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:20px;transition:color var(--tr)}
 .afeats{list-style:none;display:flex;flex-direction:column;gap:7px;margin-bottom:24px}
@@ -600,6 +607,21 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:24
     <li>Standalone OWL dashboard — no list view dependency</li>
   </ul>
   <div class="afoot"><div class="alinks"><a href="https://apps.odoo.com/apps/modules/18.0/nexus_excel_exporter" class="alnk lc" target="_blank">Odoo Apps <svg viewBox="0 0 14 14"><path d="M3 7h8M7 3l4 4-4 4"/></svg></a><a href="https://youtu.be/Ooi18KU30h8" class="alnk yt-btn" target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg> Watch Demo</a></div></div>
+</div>
+      <div class="acard ac-b reveal">
+  <div class="aglow"></div>
+  <img src="banner4.png" alt="Nexus Customer Product Filter" style="width:100%;border-radius:8px;margin-bottom:12px;">
+  <div class="acard-icon aic-b"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+  <span class="abadge ab-b">Odoo 18 · SALES</span>
+  <h3>Nexus Customer Product Filter</h3>
+  <p>Restrict the product dropdown in sale orders to only the items each customer is allowed to buy — enforced at the ORM level with zero bypass.</p>
+  <ul class="afeats">
+    <li>ORM-level _search() override — works even if salespeople type directly</li>
+    <li>Per-customer "Active Items" tab to assign allowed products</li>
+    <li>Automatic warning when a restricted product is attempted</li>
+    <li>Manager security group with role-based access control</li>
+  </ul>
+  <div class="afoot"><div class="alinks"><a href="https://apps.odoo.com/apps/modules/18.0/nexus_customer_product_filter" class="alnk lb" target="_blank">Odoo Apps <svg viewBox="0 0 14 14"><path d="M3 7h8M7 3l4 4-4 4"/></svg></a></div></div>
 </div>
     </div>
   </div>

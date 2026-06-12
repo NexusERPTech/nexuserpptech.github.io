@@ -330,6 +330,42 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:24
 .wcard:nth-child(2) .wtag{background:rgba(139,92,246,0.12);color:#A78BFA}
 .wcard:nth-child(3) .wtag{background:rgba(255,107,53,0.12);color:#FF8C60}
 .wcard:nth-child(4) .wtag{background:rgba(0,200,100,0.1);color:#00C864}
+/* KPI animated icons */
+.kpi-card{height:300px}
+.kpi-num{font-size:42px}
+.kpi-anim{height:66px;margin-bottom:10px;position:relative;display:flex;align-items:center;justify-content:center;z-index:1;flex-shrink:0}
+@keyframes kStack{0%{transform:translateY(-16px);opacity:0}15%{transform:translateY(0);opacity:1}80%{opacity:1}95%,100%{opacity:0}}
+.kbox{width:24px;height:15px;border-radius:4px;background:rgba(255,255,255,.92);animation:kStack 4.5s infinite}
+.kbox.b2{background:rgba(255,255,255,.65)}
+.kbox.b3{background:rgba(255,255,255,.42)}
+@keyframes kPing{0%{transform:scale(.3);opacity:.9}100%{transform:scale(1.8);opacity:0}}
+@keyframes kPin{0%,100%{transform:scale(1)}50%{transform:scale(1.7)}}
+.kping{position:absolute;width:52px;height:52px;border-radius:50%;border:1.5px solid rgba(255,255,255,.85);animation:kPing 2.4s ease-out infinite}
+.kradar{width:56px;height:56px;border-radius:50%;border:1px solid rgba(255,255,255,.5);position:relative}
+.kpinpt{position:absolute;width:7px;height:7px;border-radius:50%;background:#fff;animation:kPin 2.4s infinite}
+@keyframes kFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes kSlide{0%,28%{transform:translateX(0)}36%,62%{transform:translateX(-30px)}70%,96%{transform:translateX(-60px)}100%{transform:translateX(0)}}
+.kphone{width:38px;height:62px;border:1.5px solid rgba(255,255,255,.95);border-radius:9px;padding:3px;animation:kFloat 4s ease-in-out infinite}
+.kscreen{width:100%;height:100%;border-radius:5px;overflow:hidden}
+.kstrip{display:flex;width:90px;height:100%;animation:kSlide 7s infinite}
+.kapp{width:30px;height:100%;flex-shrink:0;background:rgba(255,255,255,.22);padding:4px;display:flex;flex-direction:column;gap:3px}
+.kapp i{display:block;border-radius:2px;background:rgba(255,255,255,.8)}
+@keyframes kCycle{0%{opacity:0;transform:scale(.85)}5%,17%{opacity:1;transform:scale(1)}23%,100%{opacity:0;transform:scale(.85)}}
+.kind{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;animation:kCycle 10s infinite}
+.kind svg{width:36px;height:36px;stroke:#fff;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+@keyframes kFill{0%{width:0}60%{width:100%}92%{width:100%}100%{width:0}}
+@keyframes kDot1{0%,14%{transform:translate(-50%,-50%) scale(0)}20%,90%{transform:translate(-50%,-50%) scale(1)}100%{transform:translate(-50%,-50%) scale(0)}}
+@keyframes kDot2{0%,30%{transform:translate(-50%,-50%) scale(0)}36%,90%{transform:translate(-50%,-50%) scale(1)}100%{transform:translate(-50%,-50%) scale(0)}}
+@keyframes kDot3{0%,46%{transform:translate(-50%,-50%) scale(0)}52%,90%{transform:translate(-50%,-50%) scale(1)}100%{transform:translate(-50%,-50%) scale(0)}}
+.ktl{width:112px}
+.ktl-years{display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.75);font-family:var(--mono);margin-bottom:7px}
+.ktrack{height:5px;border-radius:3px;background:rgba(255,255,255,.25);position:relative}
+.kfill{position:absolute;left:0;top:0;bottom:0;border-radius:3px;background:rgba(255,255,255,.92);animation:kFill 5s ease-in-out infinite}
+.kdot{position:absolute;top:50%;width:9px;height:9px;border-radius:50%;background:#fff;transform:translate(-50%,-50%) scale(0)}
+.kd1{left:25%;animation:kDot1 5s infinite}
+.kd2{left:55%;animation:kDot2 5s infinite}
+.kd3{left:85%;animation:kDot3 5s infinite}
+@media(max-width:480px){.kpi-card{height:285px}.kpi-num{font-size:36px}}
 </style> 
 </head>
 <body>
@@ -385,133 +421,344 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:24
       <p class="ss">Built, deployed, and running in production across multiple industries and countries.</p>
     </div>
 
-    <div class="kpi-grid reveal">
+   <!DOCTYPE html>
+<!-- ═══════════════════════════════════════════════════════════════════
+     ERPNexus — Animated KPI Flip Cards (replaces emoji icons)
+     Open this file in your browser to preview all 6 cards first.
 
-      <div class="kpi-card kpi-cyan">
-        <div class="kpi-inner">
-          <div class="kpi-front">
-            <div class="kpi-icon">📦</div>
-            <div class="kpi-num">7+</div>
-            <div class="kpi-label">Odoo Modules Published</div>
-            <div class="kpi-note">Versions 16 · 17 · 18 · 19</div>
-          </div>
-          <div class="kpi-back">
-            <div class="kpi-back-title">Published modules</div>
-            <ul class="kpi-back-list">
-              <li>Kitchen Production Tracker</li>
-              <li>Nexus Excel Exporter</li>
-              <li>Nexus Sentinel</li>
-              <li>Overdue Invoice Block</li>
-              <li>Email Verification &amp; more</li>
-            </ul>
+     HOW TO APPLY TO YOUR SITE (3 steps):
+
+     STEP 1 — CSS: copy everything between
+              "PART 1 START" and "PART 1 END"
+              and paste it just BEFORE the closing </style> in your <head>.
+              (You may delete your old rule:  .kpi-icon{font-size:30px;margin-bottom:8px}  )
+
+     STEP 2 — HTML: in your <section id="stats">, replace everything from
+              the line  <div class="kpi-grid reveal">  down to its closing
+              </div>  (the one sitting right before:
+                  </div>
+                </section>
+                <section id="about">
+              )
+              with everything between "PART 2 START" and "PART 2 END".
+
+     STEP 3 — JS: copy everything between "PART 3 START" and "PART 3 END"
+              and paste it just BEFORE the closing </script> at the
+              bottom of your page (after your proj-card mouse code).
+     ═══════════════════════════════════════════════════════════════════ -->
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KPI Animated Cards — Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ── base styles copied from your site so the preview looks identical (do NOT copy this block) ── */
+:root{--cyan:#00B4D8;--mono:"JetBrains Mono",monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0A1628;color:#E8F4F8;font-family:"Outfit",sans-serif;padding:60px 5%}
+.st{font-size:2.2rem;font-weight:800;letter-spacing:-1px;margin-bottom:10px}
+.ss{font-size:15px;color:#7BA7BC;font-weight:300;margin-bottom:40px}
+.kpi-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:2rem;padding-bottom:8px}
+@media(max-width:768px){.kpi-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:480px){.kpi-grid{grid-template-columns:repeat(2,1fr)}}
+.kpi-card{height:265px;perspective:1000px;cursor:pointer}
+.kpi-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.4,0,.2,1)}
+.kpi-card:hover .kpi-inner{transform:rotateY(180deg)}
+.kpi-front,.kpi-back{position:absolute;inset:0;border-radius:18px;padding:26px 22px;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;color:#fff;display:flex;flex-direction:column}
+.kpi-back{transform:rotateY(180deg)}
+.kpi-front::after,.kpi-back::after{content:'';position:absolute;width:100px;height:100px;border-radius:50%;background:rgba(255,255,255,.1);bottom:-30px;right:-30px;pointer-events:none}
+.kpi-front::before{content:'';position:absolute;width:55px;height:55px;border-radius:50%;background:rgba(255,255,255,.07);top:-18px;left:-10px;pointer-events:none}
+.kpi-cyan .kpi-front,.kpi-cyan .kpi-back{background:linear-gradient(135deg,#38bdf8,#0ea5e9)}
+.kpi-violet .kpi-front,.kpi-violet .kpi-back{background:linear-gradient(135deg,#0ea5e9,#0284c7)}
+.kpi-emerald .kpi-front,.kpi-emerald .kpi-back{background:linear-gradient(135deg,#0284c7,#0369a1)}
+.kpi-rose .kpi-front,.kpi-rose .kpi-back{background:linear-gradient(135deg,#0369a1,#1e40af)}
+.kpi-amber .kpi-front,.kpi-amber .kpi-back{background:linear-gradient(135deg,#1e40af,#1e3a8a)}
+.kpi-indigo .kpi-front,.kpi-indigo .kpi-back{background:linear-gradient(135deg,#1e3a8a,#0f172a)}
+.kpi-num{font-size:48px;font-weight:900;line-height:1;letter-spacing:-.03em;margin-bottom:6px}
+.kpi-label{font-size:15px;font-weight:600;opacity:.9;line-height:1.3;flex:1}
+.kpi-note{font-size:10px;opacity:.6;margin-top:6px}
+.kpi-back-title{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;opacity:.7;margin-bottom:10px}
+.kpi-back-list{list-style:none;display:flex;flex-direction:column;gap:7px;flex:1}
+.kpi-back-list li{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:500;line-height:1.3}
+.kpi-back-list li::before{content:'';width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.65);flex-shrink:0}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+/* ════════════════ PART 1 START — paste before </style> in your <head> ════════════════ */
+/* KPI animated icons */
+.kpi-card{height:300px}
+.kpi-num{font-size:42px}
+.kpi-anim{height:66px;margin-bottom:10px;position:relative;display:flex;align-items:center;justify-content:center;z-index:1;flex-shrink:0}
+@keyframes kStack{0%{transform:translateY(-16px);opacity:0}15%{transform:translateY(0);opacity:1}80%{opacity:1}95%,100%{opacity:0}}
+.kbox{width:24px;height:15px;border-radius:4px;background:rgba(255,255,255,.92);animation:kStack 4.5s infinite}
+.kbox.b2{background:rgba(255,255,255,.65)}
+.kbox.b3{background:rgba(255,255,255,.42)}
+@keyframes kPing{0%{transform:scale(.3);opacity:.9}100%{transform:scale(1.8);opacity:0}}
+@keyframes kPin{0%,100%{transform:scale(1)}50%{transform:scale(1.7)}}
+.kping{position:absolute;width:52px;height:52px;border-radius:50%;border:1.5px solid rgba(255,255,255,.85);animation:kPing 2.4s ease-out infinite}
+.kradar{width:56px;height:56px;border-radius:50%;border:1px solid rgba(255,255,255,.5);position:relative}
+.kpinpt{position:absolute;width:7px;height:7px;border-radius:50%;background:#fff;animation:kPin 2.4s infinite}
+@keyframes kFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes kSlide{0%,28%{transform:translateX(0)}36%,62%{transform:translateX(-30px)}70%,96%{transform:translateX(-60px)}100%{transform:translateX(0)}}
+.kphone{width:38px;height:62px;border:1.5px solid rgba(255,255,255,.95);border-radius:9px;padding:3px;animation:kFloat 4s ease-in-out infinite}
+.kscreen{width:100%;height:100%;border-radius:5px;overflow:hidden}
+.kstrip{display:flex;width:90px;height:100%;animation:kSlide 7s infinite}
+.kapp{width:30px;height:100%;flex-shrink:0;background:rgba(255,255,255,.22);padding:4px;display:flex;flex-direction:column;gap:3px}
+.kapp i{display:block;border-radius:2px;background:rgba(255,255,255,.8)}
+@keyframes kCycle{0%{opacity:0;transform:scale(.85)}5%,17%{opacity:1;transform:scale(1)}23%,100%{opacity:0;transform:scale(.85)}}
+.kind{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;animation:kCycle 10s infinite}
+.kind svg{width:36px;height:36px;stroke:#fff;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+@keyframes kFill{0%{width:0}60%{width:100%}92%{width:100%}100%{width:0}}
+@keyframes kDot1{0%,14%{transform:translate(-50%,-50%) scale(0)}20%,90%{transform:translate(-50%,-50%) scale(1)}100%{transform:translate(-50%,-50%) scale(0)}}
+@keyframes kDot2{0%,30%{transform:translate(-50%,-50%) scale(0)}36%,90%{transform:translate(-50%,-50%) scale(1)}100%{transform:translate(-50%,-50%) scale(0)}}
+@keyframes kDot3{0%,46%{transform:translate(-50%,-50%) scale(0)}52%,90%{transform:translate(-50%,-50%) scale(1)}100%{transform:translate(-50%,-50%) scale(0)}}
+.ktl{width:112px}
+.ktl-years{display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.75);font-family:var(--mono);margin-bottom:7px}
+.ktrack{height:5px;border-radius:3px;background:rgba(255,255,255,.25);position:relative}
+.kfill{position:absolute;left:0;top:0;bottom:0;border-radius:3px;background:rgba(255,255,255,.92);animation:kFill 5s ease-in-out infinite}
+.kdot{position:absolute;top:50%;width:9px;height:9px;border-radius:50%;background:#fff;transform:translate(-50%,-50%) scale(0)}
+.kd1{left:25%;animation:kDot1 5s infinite}
+.kd2{left:55%;animation:kDot2 5s infinite}
+.kd3{left:85%;animation:kDot3 5s infinite}
+@media(max-width:480px){.kpi-card{height:285px}.kpi-num{font-size:36px}}
+/* ════════════════ PART 1 END ════════════════ */
+</style>
+</head>
+<body>
+<h2 class="st">Preview — hover any card to flip it</h2>
+<p class="ss">This is exactly how the cards will look on your site. The back faces are unchanged.</p>
+
+<!-- ════════════════ PART 2 START — replaces your <div class="kpi-grid reveal"> ... </div> ════════════════ -->
+<div class="kpi-grid reveal">
+
+  <div class="kpi-card kpi-cyan">
+    <div class="kpi-inner">
+      <div class="kpi-front">
+        <div class="kpi-anim" aria-hidden="true">
+          <div style="display:flex;align-items:flex-end;gap:5px">
+            <div style="display:flex;flex-direction:column;gap:3px">
+              <div class="kbox b3" style="animation-delay:1.2s"></div>
+              <div class="kbox b2" style="animation-delay:.6s"></div>
+              <div class="kbox" style="animation-delay:0s"></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:3px">
+              <div class="kbox b3" style="animation-delay:1.8s"></div>
+              <div class="kbox b2" style="animation-delay:.9s"></div>
+            </div>
           </div>
         </div>
+        <div class="kpi-num" data-target="7">7+</div>
+        <div class="kpi-label">Odoo Modules Published</div>
+        <div class="kpi-note">Versions 16 · 17 · 18 · 19</div>
       </div>
+      <div class="kpi-back">
+        <div class="kpi-back-title">Published modules</div>
+        <ul class="kpi-back-list">
+          <li>Kitchen Production Tracker</li>
+          <li>Nexus Excel Exporter</li>
+          <li>Nexus Sentinel</li>
+          <li>Overdue Invoice Block</li>
+          <li>Email Verification &amp; more</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-      <div class="kpi-card kpi-violet">
-        <div class="kpi-inner">
-          <div class="kpi-front">
-            <div class="kpi-icon">🚀</div>
-            <div class="kpi-num">16+</div>
-            <div class="kpi-label">Live ERP Deployments</div>
-            <div class="kpi-note">Iraq · UAE · Lebanon</div>
-          </div>
-          <div class="kpi-back">
-            <div class="kpi-back-title">Industries deployed</div>
-            <ul class="kpi-back-list">
-              <li>Food manufacturing</li>
-              <li>Air catering</li>
-              <li>Government transport</li>
-              <li>Retail &amp; eCommerce</li>
-              <li>Education platforms</li>
-            </ul>
+  <div class="kpi-card kpi-violet">
+    <div class="kpi-inner">
+      <div class="kpi-front">
+        <div class="kpi-anim" aria-hidden="true">
+          <div class="kping"></div>
+          <div class="kping" style="animation-delay:1.2s"></div>
+          <div class="kradar">
+            <div class="kpinpt" style="top:15px;left:26px"></div>
+            <div class="kpinpt" style="top:32px;left:13px;animation-delay:.8s"></div>
+            <div class="kpinpt" style="top:35px;left:38px;animation-delay:1.6s"></div>
           </div>
         </div>
+        <div class="kpi-num" data-target="16">16+</div>
+        <div class="kpi-label">Live ERP Deployments</div>
+        <div class="kpi-note">Iraq · UAE · Lebanon</div>
       </div>
+      <div class="kpi-back">
+        <div class="kpi-back-title">Industries deployed</div>
+        <ul class="kpi-back-list">
+          <li>Food manufacturing</li>
+          <li>Air catering</li>
+          <li>Government transport</li>
+          <li>Retail &amp; eCommerce</li>
+          <li>Education platforms</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-      <div class="kpi-card kpi-emerald">
-        <div class="kpi-inner">
-          <div class="kpi-front">
-            <div class="kpi-icon">📱</div>
-            <div class="kpi-num">22+</div>
-            <div class="kpi-label">Flutter Apps Shipped</div>
-            <div class="kpi-note">iOS · Android · Play Store</div>
-          </div>
-          <div class="kpi-back">
-            <div class="kpi-back-title">App types built</div>
-            <ul class="kpi-back-list">
-              <li>Customer ordering apps</li>
-              <li>Delivery driver apps</li>
-              <li>Vendor management</li>
-              <li>Service checker tools</li>
-              <li>Video conferencing</li>
-            </ul>
+  <div class="kpi-card kpi-emerald">
+    <div class="kpi-inner">
+      <div class="kpi-front">
+        <div class="kpi-anim" aria-hidden="true">
+          <div class="kphone">
+            <div class="kscreen">
+              <div class="kstrip">
+                <div class="kapp"><i style="height:5px;width:65%"></i><i style="height:11px;opacity:.5"></i><i style="height:11px;opacity:.5"></i></div>
+                <div class="kapp"><i style="height:5px;width:65%"></i><i style="height:24px;opacity:.5"></i></div>
+                <div class="kapp"><i style="height:5px;width:65%"></i><i style="height:11px;opacity:.5"></i><i style="height:11px;opacity:.5"></i></div>
+              </div>
+            </div>
           </div>
         </div>
+        <div class="kpi-num" data-target="22">22+</div>
+        <div class="kpi-label">Flutter Apps Shipped</div>
+        <div class="kpi-note">iOS · Android · Play Store</div>
       </div>
+      <div class="kpi-back">
+        <div class="kpi-back-title">App types built</div>
+        <ul class="kpi-back-list">
+          <li>Customer ordering apps</li>
+          <li>Delivery driver apps</li>
+          <li>Vendor management</li>
+          <li>Service checker tools</li>
+          <li>Video conferencing</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-      <div class="kpi-card kpi-rose">
-        <div class="kpi-inner">
-          <div class="kpi-front">
-            <div class="kpi-icon">🔗</div>
-            <div class="kpi-num">14+</div>
-            <div class="kpi-label">Production Integrations</div>
-            <div class="kpi-note">Payment · CDN · OTP · APIs</div>
+  <div class="kpi-card kpi-rose">
+    <div class="kpi-inner">
+      <div class="kpi-front">
+        <div class="kpi-anim" aria-hidden="true">
+          <svg viewBox="0 0 130 66" width="130" height="66">
+            <path d="M22 12 L65 33" stroke="rgba(255,255,255,.4)" stroke-width="1.2"/>
+            <path d="M108 12 L65 33" stroke="rgba(255,255,255,.4)" stroke-width="1.2"/>
+            <path d="M22 54 L65 33" stroke="rgba(255,255,255,.4)" stroke-width="1.2"/>
+            <path d="M108 54 L65 33" stroke="rgba(255,255,255,.4)" stroke-width="1.2"/>
+            <circle cx="22" cy="12" r="5" fill="rgba(255,255,255,.55)"/>
+            <circle cx="108" cy="12" r="5" fill="rgba(255,255,255,.55)"/>
+            <circle cx="22" cy="54" r="5" fill="rgba(255,255,255,.55)"/>
+            <circle cx="108" cy="54" r="5" fill="rgba(255,255,255,.55)"/>
+            <circle r="3" fill="#fff"><animateMotion dur="2.4s" repeatCount="indefinite" path="M22 12 L65 33"/></circle>
+            <circle r="3" fill="#fff"><animateMotion dur="2.4s" begin="0.6s" repeatCount="indefinite" path="M108 12 L65 33"/></circle>
+            <circle r="3" fill="#fff"><animateMotion dur="2.4s" begin="1.2s" repeatCount="indefinite" path="M22 54 L65 33"/></circle>
+            <circle r="3" fill="#fff"><animateMotion dur="2.4s" begin="1.8s" repeatCount="indefinite" path="M108 54 L65 33"/></circle>
+            <circle cx="65" cy="33" r="9" fill="rgba(255,255,255,.95)"/>
+            <path d="M61 33 l3 3 5.5-6.5" stroke="#0c4a6e" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="kpi-num" data-target="14">14+</div>
+        <div class="kpi-label">Production Integrations</div>
+        <div class="kpi-note">Payment · CDN · OTP · APIs</div>
+      </div>
+      <div class="kpi-back">
+        <div class="kpi-back-title">Integration types</div>
+        <ul class="kpi-back-list">
+          <li>Payment gateways &amp; QR</li>
+          <li>SMS &amp; WhatsApp OTP</li>
+          <li>CDN storage &amp; streaming</li>
+          <li>Hardware attendance</li>
+          <li>Government portals</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="kpi-card kpi-amber">
+    <div class="kpi-inner">
+      <div class="kpi-front">
+        <div class="kpi-anim" aria-hidden="true">
+          <div class="kind" style="animation-delay:0s">
+            <svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V8l5 4V8l5 4V8l4 3v10"/><path d="M9 17h.01M13 17h.01M17 17h.01"/></svg>
           </div>
-          <div class="kpi-back">
-            <div class="kpi-back-title">Integration types</div>
-            <ul class="kpi-back-list">
-              <li>Payment gateways &amp; QR</li>
-              <li>SMS &amp; WhatsApp OTP</li>
-              <li>CDN storage &amp; streaming</li>
-              <li>Hardware attendance</li>
-              <li>Government portals</li>
-            </ul>
+          <div class="kind" style="animation-delay:2s">
+            <svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          </div>
+          <div class="kind" style="animation-delay:4s">
+            <svg viewBox="0 0 24 24"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg>
+          </div>
+          <div class="kind" style="animation-delay:6s">
+            <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          </div>
+          <div class="kind" style="animation-delay:8s">
+            <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
           </div>
         </div>
+        <div class="kpi-num" data-target="7">7+</div>
+        <div class="kpi-label">Industries Served</div>
+        <div class="kpi-note">Food · Gov · Education · Retail</div>
       </div>
+      <div class="kpi-back">
+        <div class="kpi-back-title">Sectors covered</div>
+        <ul class="kpi-back-list">
+          <li>Food &amp; air catering</li>
+          <li>Government &amp; transport</li>
+          <li>Online education</li>
+          <li>Retail &amp; dropshipping</li>
+          <li>ISP &amp; IT services</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-      <div class="kpi-card kpi-amber">
-        <div class="kpi-inner">
-          <div class="kpi-front">
-            <div class="kpi-icon">🏭</div>
-            <div class="kpi-num">7+</div>
-            <div class="kpi-label">Industries Served</div>
-            <div class="kpi-note">Food · Gov · Education · Retail</div>
-          </div>
-          <div class="kpi-back">
-            <div class="kpi-back-title">Sectors covered</div>
-            <ul class="kpi-back-list">
-              <li>Food &amp; air catering</li>
-              <li>Government &amp; transport</li>
-              <li>Online education</li>
-              <li>Retail &amp; dropshipping</li>
-              <li>ISP &amp; IT services</li>
-            </ul>
+  <div class="kpi-card kpi-indigo">
+    <div class="kpi-inner">
+      <div class="kpi-front">
+        <div class="kpi-anim" aria-hidden="true">
+          <div class="ktl">
+            <div class="ktl-years"><span>2021</span><span>2026</span></div>
+            <div class="ktrack">
+              <div class="kfill"></div>
+              <div class="kdot kd1"></div>
+              <div class="kdot kd2"></div>
+              <div class="kdot kd3"></div>
+            </div>
           </div>
         </div>
+        <div class="kpi-num" data-target="5">5+</div>
+        <div class="kpi-label">Years in ERP Engineering</div>
+        <div class="kpi-note">Odoo · ERPNext · Custom</div>
       </div>
+      <div class="kpi-back">
+        <div class="kpi-back-title">Core expertise</div>
+        <ul class="kpi-back-list">
+          <li>Odoo 16–19 Enterprise</li>
+          <li>ERPNext / Frappe</li>
+          <li>Flutter &amp; Dart</li>
+          <li>Laravel &amp; PHP</li>
+          <li>Linux server admin</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-      <div class="kpi-card kpi-indigo">
-        <div class="kpi-inner">
-          <div class="kpi-front">
-            <div class="kpi-icon">⭐</div>
-            <div class="kpi-num">5+</div>
-            <div class="kpi-label">Years in ERP Engineering</div>
-            <div class="kpi-note">Odoo · ERPNext · Custom</div>
-          </div>
-          <div class="kpi-back">
-            <div class="kpi-back-title">Core expertise</div>
-            <ul class="kpi-back-list">
-              <li>Odoo 16–19 Enterprise</li>
-              <li>ERPNext / Frappe</li>
-              <li>Flutter &amp; Dart</li>
-              <li>Laravel &amp; PHP</li>
-              <li>Linux server admin</li>
-            </ul>
-          </div>
-        </div>
-      </div>
+</div>
+<!-- ════════════════ PART 2 END ════════════════ -->
+
+<script>
+/* ════════════════ PART 3 START — paste before the closing </script> at the bottom of your page ════════════════ */
+const kpiObs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    const el=e.target;
+    const target=parseInt(el.dataset.target);
+    const start=performance.now();
+    const dur=1400;
+    const animate=(now)=>{
+      const p=Math.min((now-start)/dur,1);
+      const eased=1-Math.pow(1-p,3);
+      el.textContent=Math.round(target*eased)+"+";
+      if(p<1)requestAnimationFrame(animate);
+    };
+    requestAnimationFrame(animate);
+    kpiObs.unobserve(el);
+  });
+},{threshold:0.5});
+document.querySelectorAll(".kpi-num[data-target]").forEach(el=>kpiObs.observe(el));
+/* ════════════════ PART 3 END ════════════════ */
+</script>
+</body>
+</html>
 
     </div>
   </div>
@@ -967,6 +1214,25 @@ document.querySelectorAll(".proj-card").forEach(card=>{
     card.style.setProperty("--my",y+"%");
   });
 });
+// KPI number count-up animation
+const kpiObs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    const el=e.target;
+    const target=parseInt(el.dataset.target);
+    const start=performance.now();
+    const dur=1400;
+    const animate=(now)=>{
+      const p=Math.min((now-start)/dur,1);
+      const eased=1-Math.pow(1-p,3);
+      el.textContent=Math.round(target*eased)+"+";
+      if(p<1)requestAnimationFrame(animate);
+    };
+    requestAnimationFrame(animate);
+    kpiObs.unobserve(el);
+  });
+},{threshold:0.5});
+document.querySelectorAll(".kpi-num[data-target]").forEach(el=>kpiObs.observe(el));
 </script>
 </body>
 </html>

@@ -365,6 +365,63 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:24
 .kd1{left:25%;animation:kDot1 5s infinite}
 .kd2{left:55%;animation:kDot2 5s infinite}
 .kd3{left:85%;animation:kDot3 5s infinite}
+/* ═══════════════════════════════════════════════════
+   MOBILE FIX PATCH
+   ═══════════════════════════════════════════════════ */
+.nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;background:transparent;border:1px solid var(--border2);border-radius:8px;cursor:pointer;padding:8px;transition:border-color 0.2s;flex-shrink:0}
+.nav-hamburger:hover{border-color:var(--cyan)}
+.nav-hamburger span{display:block;height:1.5px;background:var(--cyan);border-radius:2px;transition:transform 0.3s,opacity 0.3s}
+.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.nav-hamburger.open span:nth-child(2){opacity:0}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.nav-drawer{position:fixed;top:68px;left:0;right:0;background:var(--nav-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:16px 5% 20px;z-index:999;flex-direction:column;gap:4px;display:none}
+.nav-drawer.open{display:flex}
+.nav-drawer a{color:var(--muted);text-decoration:none;font-size:15px;font-weight:500;padding:12px 16px;border-radius:8px;transition:background 0.2s,color 0.2s;border:1px solid transparent}
+.nav-drawer a:hover{color:var(--cyan);background:rgba(0,180,216,0.06);border-color:var(--border)}
+.nav-drawer .drawer-cta{color:var(--cyan)!important;border-color:var(--border2)!important;margin-top:8px;text-align:center;font-weight:700!important}
+@media(max-width:960px){
+  .nav-hamburger{display:flex}
+  .nav-links{display:none!important}
+  .hero{padding:100px 5% 60px;min-height:auto}
+  .hero-left{max-width:100%}
+  .hero-right{display:none!important}
+  .hero-metrics{display:grid!important;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:32px;padding-top:24px;flex-wrap:unset}
+  .hm-item{border-right:none!important;margin-right:0!important;padding-right:0!important;padding:14px 16px!important;background:rgba(0,180,216,0.04);border:1px solid var(--border)!important;border-radius:10px}
+  .mv{font-size:22px;white-space:normal}
+  .ml{white-space:normal}
+  .about-wrap,div.about-wrap[style]{display:flex!important;flex-direction:column!important;gap:32px!important;grid-template-columns:unset!important}
+  .about-logo-area{order:-1}
+  .about-logo-img{width:160px!important;height:160px!important}
+  .comm-grid{grid-template-columns:1fr!important;gap:32px}
+  .kpi-grid{grid-template-columns:repeat(2,1fr)!important}
+  .kpi-card{height:260px}
+  .kpi-num{font-size:36px}
+  .kpi-anim{height:54px}
+  section{padding:64px 5%}
+  .ccard{padding:32px 20px}
+  .cemail{font-size:15px;word-break:break-all}
+  .int-grid{grid-template-columns:1fr!important}
+  .int-ready-banner{flex-direction:column;gap:12px;padding:20px}
+  .why-grid{grid-template-columns:repeat(2,1fr)!important}
+  footer{flex-direction:column;align-items:flex-start;gap:16px}
+  .flinks{flex-wrap:wrap;gap:12px}
+}
+@media(max-width:480px){
+  h1{font-size:2.1rem!important;letter-spacing:-1px}
+  .st{font-size:1.55rem!important}
+  .hero-sub{font-size:15px!important}
+  .hero-metrics{grid-template-columns:repeat(2,1fr)}
+  .kpi-grid{grid-template-columns:1fr!important}
+  .kpi-card{height:250px}
+  .why-grid{grid-template-columns:1fr!important}
+  .apps-grid,.tab-content.active,.proj-grid{grid-template-columns:1fr!important}
+  .prow{flex-direction:column;align-items:stretch}
+  .pbtn{justify-content:center}
+  .cemail-wrap{padding:12px 16px}
+  section{padding:48px 4%}
+  nav{padding:0 4%}
+  .back-top{bottom:16px;right:16px}
+}
 @media(max-width:480px){.kpi-card{height:285px}.kpi-num{font-size:36px}}
 </style> 
 </head>
@@ -383,12 +440,27 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:24
     <li><a href="networking.html">IT Services</a></li>
     <li><a href="#contact" class="nav-cta">Contact</a></li>
   </ul>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
   <div class="toggle-wrap">
     <span style="font-size:14px">🌙</span>
     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme"><div class="toggle-ball"></div></button>
     <span style="font-size:14px">☀️</span>
   </div>
 </nav>
+<div class="nav-drawer" id="navDrawer">
+  <a href="#about">About</a>
+  <a href="#apps">Apps</a>
+  <a href="#projects">Projects</a>
+  <a href="#integrations">Integrations</a>
+  <a href="#why">Why Us</a>
+  <a href="networking.html">IT Services</a>
+  <a href="blog.html">Blog</a>
+  <a href="#contact" class="drawer-cta">Get in Touch →</a>
+</div>
 <section class="hero">
   <div class="hero-left">
     <div class="hero-tag"><div class="hero-dot"></div>ERP · NETWORKING · CYBERSECURITY · INTEGRATIONS</div>
@@ -1095,6 +1167,29 @@ const kpiObs=new IntersectionObserver((entries)=>{
   });
 },{threshold:0.5});
 document.querySelectorAll(".kpi-num[data-target]").forEach(el=>kpiObs.observe(el));
+// ── HAMBURGER MENU ──────────────────────────────
+const hamburger = document.getElementById('navHamburger');
+const drawer = document.getElementById('navDrawer');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  drawer.classList.toggle('open');
+  document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+});
+drawer.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    drawer.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+});
+document.addEventListener('click', (e) => {
+  if (!hamburger.contains(e.target) && !drawer.contains(e.target)) {
+    hamburger.classList.remove('open');
+    drawer.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+});
+// ── END HAMBURGER ────────────────────────────────
 </script>
 </body>
 </html>

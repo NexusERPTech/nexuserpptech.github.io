@@ -422,13 +422,13 @@
         </div>
 
         <!-- OTPIQ -->
-        <div class="kpi-card card-g fb">
+        <div class="kpi-card card-g fb clickable" onclick="openOtpiqModal()">
             <div class="card-label">Messaging</div>
             <div class="card-title">OTPIQ</div>
             <div class="card-desc">SMS & WhatsApp OTP verification for Laravel using the OTPIQ platform.</div>
             <div class="card-footer">
                 <span class="card-price">$100</span>
-                <span class="badge-soon">Coming Soon</span>
+                <span class="badge-live">Live</span>
             </div>
         </div>
         <!-- SilkRoute -->
@@ -511,7 +511,63 @@
         </div>
     </div>
 </div>
+<!-- MODAL — OTPIQ -->
+<div class="modal-overlay" id="otpiq-modal-overlay" onclick="otpiqBgClick(event)">
+    <div class="modal">
+        <div class="m-head">
+            <div class="m-head-l">
+                <div class="m-icon" style="background:rgba(26,192,112,0.15);">
+                    <i class="ti ti-message-dots" style="color:#0a8a50;"></i>
+                </div>
+                <div>
+                    <div class="m-name">OTPIQ Laravel Connector</div>
+                    <div class="m-sub">SMS & WhatsApp OTP — Iraqi market</div>
+                </div>
+            </div>
+            <button class="m-close" onclick="closeOtpiqModal()"><i class="ti ti-x"></i></button>
+        </div>
 
+        <div class="m-body">
+            <div class="m-sec-title">What's included</div>
+            <div class="m-feats">
+                <div class="m-feat"><i class="ti ti-check" style="color:#0a8a50;"></i><span>Send OTP via SMS or WhatsApp with one method call</span></div>
+                <div class="m-feat"><i class="ti ti-check" style="color:#0a8a50;"></i><span>Provider selection — whatsapp-sms or sms</span></div>
+                <div class="m-feat"><i class="ti ti-check" style="color:#0a8a50;"></i><span>Laravel Service Provider with auto-discovery</span></div>
+                <div class="m-feat"><i class="ti ti-check" style="color:#0a8a50;"></i><span>Facade support — OtpIq::send()</span></div>
+                <div class="m-feat"><i class="ti ti-check" style="color:#0a8a50;"></i><span>Auto phone number normalization</span></div>
+                <div class="m-feat"><i class="ti ti-check" style="color:#0a8a50;"></i><span>Clean exception handling</span></div>
+                <div class="m-feat"><i class="ti ti-check" style="color:#0a8a50;"></i><span>Full README with integration examples</span></div>
+            </div>
+
+            <div class="m-sec-title">Choose a tier</div>
+            <div class="m-tiers">
+                <div class="m-tier">
+                    <div class="t-name">Package only</div>
+                    <div class="t-price">$100</div>
+                    <div class="t-note">ZIP download</div>
+                </div>
+                <div class="m-tier featured" style="border-color:#0a8a50;">
+                    <div class="t-name">Installed</div>
+                    <div class="t-price">$200</div>
+                    <div class="t-note">We set it up</div>
+                </div>
+                <div class="m-tier">
+                    <div class="t-name">Full support</div>
+                    <div class="t-price">$350</div>
+                    <div class="t-note">30-day support</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="m-foot">
+            <div class="m-fp">From $100</div>
+            <a class="buy-btn" style="background:#0a8a50;"
+               href="mailto:info@erpnexus.tech?subject=Purchase%3A%20OTPIQ%20Laravel%20Connector&body=Hello%20Nexus%20Team%2C%0A%0AI%20am%20interested%20in%20purchasing%20the%20OTPIQ%20Laravel%20Connector.%0A%0AMy%20details%3A%0A-%20Name%3A%20%0A-%20Company%3A%20%0A-%20Website%20%2F%20Project%20URL%3A%20%0A-%20Laravel%20Version%3A%20%0A-%20Preferred%20Tier%3A%20%5B%20%5D%20Package%20only%20%24100%20%20%5B%20%5D%20Installed%20%24200%20%20%5B%20%5D%20Full%20support%20%24350%0A%0AAdditional%20notes%3A%0A%0A%0AThank%20you.">
+                <i class="ti ti-mail"></i> Purchase now
+            </a>
+        </div>
+    </div>
+</div>
 <!-- FOOTER -->
 <footer>
     &copy; 2025 Nexus ERP Systems &mdash; <a href="mailto:info@erpnexus.tech">info@erpnexus.tech</a> &mdash; <a href="https://erpnexus.tech">erpnexus.tech</a>
@@ -519,7 +575,7 @@
 
 <script>
     /* 3D tilt on QiCard only */
-    const card = document.querySelector('.clickable');
+    document.querySelectorAll('.clickable').forEach(card => {
     card.addEventListener('mousemove', e => {
         const r = card.getBoundingClientRect();
         const x = e.clientX - r.left, y = e.clientY - r.top;
@@ -533,15 +589,18 @@
     card.addEventListener('mouseleave', () => {
         card.classList.remove('no-float');
         card.style.transform = '';
-    });
-
+  });
+});
     /* Modal */
     function openModal()  { document.getElementById('modal-overlay').classList.add('open'); }
     function closeModal() { document.getElementById('modal-overlay').classList.remove('open'); }
     function bgClick(e)   { if(e.target===document.getElementById('modal-overlay')) closeModal(); }
+    function openOtpiqModal()  { document.getElementById('otpiq-modal-overlay').classList.add('open'); }
+    function closeOtpiqModal() { document.getElementById('otpiq-modal-overlay').classList.remove('open'); }
+    function otpiqBgClick(e)   { if(e.target===document.getElementById('otpiq-modal-overlay')) closeOtpiqModal(); }
 
     /* ESC key */
-    document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
+    document.addEventListener('keydown', e => { if(e.key==='Escape') { closeModal(); closeOtpiqModal(); } });
 </script>
 
 </body>

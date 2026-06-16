@@ -337,12 +337,17 @@
 
         .m-tiers { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
         .m-tier {
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 12px; padding: 12px 8px;
-            text-align: center;
-            background: rgba(255,255,255,0.03);
-        }
-        .m-tier.featured { border-width: 1.5px; }
+           border: 0.5px solid rgba(255,255,255,0.08);
+           border-radius: 12px;
+           padding: 12px 8px;
+           text-align: center;
+           background: rgba(255,255,255,0.03);
+           cursor: pointer;
+           transition: border-color 0.2s, background 0.2s;
+         }
+         .m-tier:hover { background: rgba(255,255,255,0.07); }
+         .m-tier.featured { border-width: 1.5px; }
+         .m-tier.selected { background: rgba(255,255,255,0.08); border-width: 1.5px; }
         .t-name  { font-size: 10px; color: var(--muted); margin-bottom: 5px; }
         .t-price { font-size: 16px; font-weight: 700; color: #fff; }
         .t-note  { font-size: 10px; color: var(--muted); margin-top: 3px; }
@@ -655,7 +660,47 @@
     function openSilkModal()  { document.getElementById('silk-modal-overlay').classList.add('open'); }
     function closeSilkModal() { document.getElementById('silk-modal-overlay').classList.remove('open'); }
     function silkBgClick(e)   { if(e.target===document.getElementById('silk-modal-overlay')) closeSilkModal(); }
+   /* Tier selection */
+function selectTier(tierEl, price, emailHref, footerEl, btnEl) {
+    const allTiers = tierEl.closest('.m-tiers').querySelectorAll('.m-tier');
+    allTiers.forEach(t => t.classList.remove('selected'));
+    tierEl.classList.add('selected');
+    footerEl.textContent = price;
+    btnEl.href = emailHref;
+}
 
+function initTiers(modalId, tiers) {
+    const modal   = document.getElementById(modalId);
+    const footer  = modal.querySelector('.m-fp');
+    const btn     = modal.querySelector('.buy-btn');
+    const tierEls = modal.querySelectorAll('.m-tier');
+    tierEls.forEach((el, i) => {
+        el.addEventListener('click', () => {
+            selectTier(el, tiers[i].price, tiers[i].href, footer, btn);
+        });
+    });
+}
+
+// QiCard tiers
+initTiers('modal-overlay', [
+    { price: 'From $200', href: 'mailto:info@erpnexus.tech?subject=Purchase%3A%20QiCard%20Laravel%20Connector%20-%20Package%20Only&body=Hello%20Nexus%20Team%2C%0A%0AI%20want%20the%20Package%20only%20tier%20(%24200)%20for%20QiCard%20Laravel%20Connector.%0A%0A-%20Name%3A%20%0A-%20Company%3A%20%0A-%20Website%3A%20%0A-%20Laravel%20Version%3A%20%0A%0AThank%20you.' },
+    { price: 'From $350', href: 'mailto:info@erpnexus.tech?subject=Purchase%3A%20QiCard%20Laravel%20Connector%20-%20Installed&body=Hello%20Nexus%20Team%2C%0A%0AI%20want%20the%20Installed%20tier%20(%24350)%20for%20QiCard%20Laravel%20Connector.%0A%0A-%20Name%3A%20%0A-%20Company%3A%20%0A-%20Website%3A%20%0A-%20Laravel%20Version%3A%20%0A-%20Server%20details%3A%20%0A%0AThank%20you.' },
+    { price: 'From $600', href: 'mailto:info@erpnexus.tech?subject=Purchase%3A%20QiCard%20Laravel%20Connector%20-%20Full%20Support&body=Hello%20Nexus%20Team%2C%0A%0AI%20want%20the%20Full%20support%20tier%20(%24600)%20for%20QiCard%20Laravel%20Connector.%0A%0A-%20Name%3A%20%0A-%20Company%3A%20%0A-%20Website%3A%20%0A-%20Laravel%20Version%3A%20%0A-%20Server%20details%3A%20%0A%0AThank%20you.' },
+]);
+
+// OTPIQ tiers
+initTiers('otpiq-modal-overlay', [
+    { price: 'From $100', href: 'mailto:info@erpnexus.tech?subject=Purchase%3A%20OTPIQ%20Laravel%20Connector%20-%20Package%20Only&body=Hello%20Nexus%20Team%2C%0A%0AI%20want%20the%20Package%20only%20tier%20(%24100)%20for%20OTPIQ%20Laravel%20Connector.%0A%0A-%20Name%3A%20%0A-%20Company%3A%20%0A-%20Website%3A%20%0A-%20Laravel%20Version%3A%20%0A%0AThank%20you.' },
+    { price: 'From $200', href: 'mailto:info@erpnexus.tech?subject=Purchase%3A%20OTPIQ%20Laravel%20Connector%20-%20Installed&body=Hello%20Nexus%20Team%2C%0A%0AI%20want%20the%20Installed%20tier%20(%24200)%20for%20OTPIQ%20Laravel%20Connector.%0A%0A-%20Name%3A%20%0A-%20Company%3A%20%0A-%20Website%3A%20%0A-%20Laravel%20Version%3A%20%0A-%20Server%20details%3A%20%0A%0AThank%20you.' },
+    { price: 'From $350', href: 'mailto:info@erpnexus.tech?subject=Purchase%3A%20OTPIQ%20Laravel%20Connector%20-%20Full%20Support&body=Hello%20Nexus%20Team%2C%0A%0AI%20want%20the%20Full%20support%20tier%20(%24350)%20for%20OTPIQ%20Laravel%20Connector.%0A%0A-%20Name%3A%20%0A-%20Company%3A%20%0A-%20Website%3A%20%0A-%20Laravel%20Version%3A%20%0A-%20Server%20details%3A%20%0A%0AThank%20you.' },
+]);
+
+// SilkRoute tiers
+initTiers('silk-modal-overlay', [
+    { price: 'From $150', href: 'mailto:info@erpnexus.tech?subject=Purchase%3A%20SilkRoute%20Laravel%20Connector%20-%20Package%20Only&body=Hello%20Nexus%20Team%2C%0A%0AI%20want%20the%20Package%20only%20tier%20(%24150)%20for%20SilkRoute%20Laravel%20Connector.%0A%0A-%20Name%3A%20%0A-%20Company%3A%20%0A-%20Website%3A%20%0A-%20Laravel%20Version%3A%20%0A%0AThank%20you.' },
+    { price: 'From $300', href: 'mailto:info@erpnexus.tech?subject=Purchase%3A%20SilkRoute%20Laravel%20Connector%20-%20Installed&body=Hello%20Nexus%20Team%2C%0A%0AI%20want%20the%20Installed%20tier%20(%24300)%20for%20SilkRoute%20Laravel%20Connector.%0A%0A-%20Name%3A%20%0A-%20Company%3A%20%0A-%20Website%3A%20%0A-%20Laravel%20Version%3A%20%0A-%20Server%20details%3A%20%0A%0AThank%20you.' },
+    { price: 'From $500', href: 'mailto:info@erpnexus.tech?subject=Purchase%3A%20SilkRoute%20Laravel%20Connector%20-%20Full%20Support&body=Hello%20Nexus%20Team%2C%0A%0AI%20want%20the%20Full%20support%20tier%20(%24500)%20for%20SilkRoute%20Laravel%20Connector.%0A%0A-%20Name%3A%20%0A-%20Company%3A%20%0A-%20Website%3A%20%0A-%20Laravel%20Version%3A%20%0A-%20Server%20details%3A%20%0A%0AThank%20you.' },
+]);
     /* ESC key */
     document.addEventListener('keydown', e => { if(e.key==='Escape') { closeModal(); closeOtpiqModal(); closeSilkModal(); } });
 </script>

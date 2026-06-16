@@ -432,13 +432,13 @@
             </div>
         </div>
         <!-- SilkRoute -->
-        <div class="kpi-card card-r fd">
+        <div class="kpi-card card-r fd clickable" onclick="openSilkModal()">
             <div class="card-label">Dropshipping</div>
             <div class="card-title">SilkRoute</div>
             <div class="card-desc">Connect your Laravel store to dropshipping suppliers — product sync, pricing engine, and order forwarding.</div>
             <div class="card-footer">
                 <span class="card-price">$150</span>
-                <span class="badge-soon">Coming Soon</span>
+                <span class="badge-live">Live</span>
             </div>
         </div>
         <!-- BunnyCDN -->
@@ -568,6 +568,60 @@
         </div>
     </div>
 </div>
+<!-- MODAL — SilkRoute -->
+<div class="modal-overlay" id="silk-modal-overlay" onclick="silkBgClick(event)">
+    <div class="modal">
+        <div class="m-head">
+            <div class="m-head-l">
+                <div class="m-icon" style="background:rgba(229,62,62,0.15);">
+                    <i class="ti ti-packages" style="color:#c53030;"></i>
+                </div>
+                <div>
+                    <div class="m-name">SilkRoute Laravel Connector</div>
+                    <div class="m-sub">Dropshipping supplier integration</div>
+                </div>
+            </div>
+            <button class="m-close" onclick="closeSilkModal()"><i class="ti ti-x"></i></button>
+        </div>
+        <div class="m-body">
+            <div class="m-sec-title">What's included</div>
+            <div class="m-feats">
+                <div class="m-feat"><i class="ti ti-check" style="color:#c53030;"></i><span>Search supplier products by keyword</span></div>
+                <div class="m-feat"><i class="ti ti-check" style="color:#c53030;"></i><span>Fetch full product detail with variants & stock</span></div>
+                <div class="m-feat"><i class="ti ti-check" style="color:#c53030;"></i><span>CNY → USD → IQD pricing engine with profit tiers</span></div>
+                <div class="m-feat"><i class="ti ti-check" style="color:#c53030;"></i><span>Shipping cost calculation (CBM + airport)</span></div>
+                <div class="m-feat"><i class="ti ti-check" style="color:#c53030;"></i><span>Submit orders directly to supplier API</span></div>
+                <div class="m-feat"><i class="ti ti-check" style="color:#c53030;"></i><span>Laravel Service Provider with auto-discovery</span></div>
+                <div class="m-feat"><i class="ti ti-check" style="color:#c53030;"></i><span>Full README with usage examples</span></div>
+            </div>
+            <div class="m-sec-title">Choose a tier</div>
+            <div class="m-tiers">
+                <div class="m-tier">
+                    <div class="t-name">Package only</div>
+                    <div class="t-price">$150</div>
+                    <div class="t-note">ZIP download</div>
+                </div>
+                <div class="m-tier featured" style="border-color:#c53030;">
+                    <div class="t-name">Installed</div>
+                    <div class="t-price">$300</div>
+                    <div class="t-note">We set it up</div>
+                </div>
+                <div class="m-tier">
+                    <div class="t-name">Full support</div>
+                    <div class="t-price">$500</div>
+                    <div class="t-note">30-day support</div>
+                </div>
+            </div>
+        </div>
+        <div class="m-foot">
+            <div class="m-fp">From $150</div>
+            <a class="buy-btn" style="background:#c53030;"
+               href="mailto:info@erpnexus.tech?subject=Purchase%3A%20SilkRoute%20Laravel%20Connector&body=Hello%20Nexus%20Team%2C%0A%0AI%20am%20interested%20in%20purchasing%20the%20SilkRoute%20Laravel%20Connector.%0A%0AMy%20details%3A%0A-%20Name%3A%20%0A-%20Company%3A%20%0A-%20Website%20%2F%20Project%20URL%3A%20%0A-%20Laravel%20Version%3A%20%0A-%20Preferred%20Tier%3A%20%5B%20%5D%20Package%20only%20%24150%20%20%5B%20%5D%20Installed%20%24300%20%20%5B%20%5D%20Full%20support%20%24500%0A%0AAdditional%20notes%3A%0A%0A%0AThank%20you.">
+                <i class="ti ti-mail"></i> Purchase now
+            </a>
+        </div>
+    </div>
+</div>
 <!-- FOOTER -->
 <footer>
     &copy; 2026 Nexus ERP Systems &mdash; <a href="mailto:info@erpnexus.tech">info@erpnexus.tech</a> &mdash; <a href="https://erpnexus.tech">erpnexus.tech</a>
@@ -598,9 +652,12 @@
     function openOtpiqModal()  { document.getElementById('otpiq-modal-overlay').classList.add('open'); }
     function closeOtpiqModal() { document.getElementById('otpiq-modal-overlay').classList.remove('open'); }
     function otpiqBgClick(e)   { if(e.target===document.getElementById('otpiq-modal-overlay')) closeOtpiqModal(); }
+    function openSilkModal()  { document.getElementById('silk-modal-overlay').classList.add('open'); }
+    function closeSilkModal() { document.getElementById('silk-modal-overlay').classList.remove('open'); }
+    function silkBgClick(e)   { if(e.target===document.getElementById('silk-modal-overlay')) closeSilkModal(); }
 
     /* ESC key */
-    document.addEventListener('keydown', e => { if(e.key==='Escape') { closeModal(); closeOtpiqModal(); } });
+    document.addEventListener('keydown', e => { if(e.key==='Escape') { closeModal(); closeOtpiqModal(); closeSilkModal(); } });
 </script>
 
 </body>

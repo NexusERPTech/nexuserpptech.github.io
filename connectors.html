@@ -1,1 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Connectors — ERPNexus</title>
+    <link rel="icon" href="icon.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <style>
+        :root {
+            --accent: #7c3aed;
+            --accent-light: #a78bfa;
+            --accent-glow: rgba(124,58,237,0.25);
+            --bg: #0d0d14;
+            --bg2: #13121f;
+            --nav-bg: rgba(13,13,20,0.92);
+            --border: rgba(255,255,255,0.08);
+            --text: #f0f0f0;
+            --muted: rgba(255,255,255,0.45);
+        }
 
+        * { margin:0; padding:0; box-sizing:border-box; }
+
+        body {
+            background: var(--bg);
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* ── NAVBAR ── */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--nav-bg);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        .nav-logo img { height: 32px; }
+        .nav-logo-text {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 0.01em;
+        }
+        .nav-logo-text span { color: var(--accent-light); }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            font-size: 14px;
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: #fff; }
+        .nav-links a.active { color: var(--accent-light); font-weight: 500; }
+
+        .nav-cta {
+            font-size: 13px;
+            font-weight: 500;
+            padding: 8px 18px;
+            border-radius: 8px;
+            background: var(--accent);
+            color: #fff;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .nav-cta:hover { background: #6d28d9; }
+
+        /* ── HERO ── */
+        .hero {
+            text-align: center;
+            padding: 5rem 1rem 3rem;
+            position: relative;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--accent-light);
+            background: rgba(124,58,237,0.12);
+            border: 1px solid rgba(124,58,237,0.25);
+            border-radius: 20px;
+            padding: 5px 14px;
+            margin-bottom: 1.25rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+        .hero h1 {
+            font-size: 42px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+            line-height: 1.15;
+        }
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--accent-light), #c4b5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero p {
+            font-size: 16px;
+            color: var(--muted);
+            max-width: 520px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* ── GRID ── */
+        .grid-wrap {
+            max-width: 960px;
+            margin: 3rem auto 5rem;
+            padding: 0 2rem;
+            perspective: 1200px;
+        }
+
+        .nc-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        /* ── CARDS ── */
+        .kpi-card {
+            border-radius: 22px;
+            padding: 28px 24px 22px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.12s ease-out, box-shadow 0.15s ease-out;
+            cursor: default;
+            border: 1px solid rgba(255,255,255,0.12);
+            overflow: hidden;
+        }
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 22px;
+            background: radial-gradient(500px circle at var(--mx,50%) var(--my,50%), rgba(255,255,255,0.1), transparent 40%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            z-index: 2;
+        }
+        .kpi-card.clickable { cursor: pointer; }
+        .kpi-card.clickable:hover::before { opacity: 1; }
+
+        /* Yellow — QiCard */
+        .card-y {
+            background: linear-gradient(145deg, #fffbe6 0%, #f5c800 100%);
+            box-shadow: 0 8px 0 #7a5800, 0 18px 40px rgba(220,160,0,0.25);
+            color: #3d2c00;
+        }
+        .card-y:hover {
+            box-shadow: 0 14px 0 #7a5800, 0 28px 55px rgba(220,160,0,0.38);
+        }
+
+        /* Green — OTPIQ */
+        .card-g {
+            background: linear-gradient(145deg, #eafaf2 0%, #1ac070 100%);
+            box-shadow: 0 8px 0 #065c30, 0 18px 40px rgba(0,160,80,0.22);
+            color: #033d22;
+        }
+
+        /* Orange — BunnyCDN */
+        .card-o {
+            background: linear-gradient(145deg, #fff4eb 0%, #f07020 100%);
+            box-shadow: 0 8px 0 #7a3000, 0 18px 40px rgba(200,90,0,0.22);
+            color: #3d1e00;
+        }
+
+        /* Float animations */
+        @keyframes floatA { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-9px);} }
+        @keyframes floatB { 0%,100%{transform:translateY(-9px);} 50%{transform:translateY(0);} }
+        @keyframes floatC { 0%,100%{transform:translateY(-4px);} 50%{transform:translateY(-11px);} }
+        .fa { animation: floatA 5.5s ease-in-out infinite; }
+        .fb { animation: floatB 5.5s ease-in-out infinite; }
+        .fc { animation: floatC 5.5s ease-in-out infinite; }
+        .no-float { animation: none !important; }
+
+        .card-label {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            opacity: 0.6;
+            margin-bottom: 10px;
+        }
+        .card-title {
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 4px;
+        }
+        .card-desc {
+            font-size: 13px;
+            opacity: 0.65;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 16px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+        .card-price {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        .badge-live {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 11px;
+            border-radius: 20px;
+            background: rgba(0,0,0,0.12);
+            letter-spacing: 0.04em;
+        }
+        .badge-soon {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 11px;
+            border-radius: 20px;
+            background: rgba(0,0,0,0.1);
+            opacity: 0.7;
+            letter-spacing: 0.04em;
+        }
+        .card-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 12px;
+            font-weight: 500;
+            opacity: 0.7;
+        }
+
+        /* ── MODAL ── */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.75);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            backdrop-filter: blur(4px);
+        }
+        .modal-overlay.open { display: flex; }
+
+        .modal {
+            background: #1a1830;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 22px;
+            width: 100%;
+            max-width: 480px;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: modalIn 0.2s ease-out;
+        }
+        @keyframes modalIn {
+            from { transform: scale(0.95); opacity: 0; }
+            to   { transform: scale(1);    opacity: 1; }
+        }
+
+        .m-head {
+            padding: 1.3rem 1.4rem 1.1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+        }
+        .m-head-l { display: flex; align-items: center; gap: 12px; }
+        .m-icon {
+            width: 44px; height: 44px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 22px; flex-shrink: 0;
+        }
+        .m-name { font-size: 16px; font-weight: 600; color: #fff; }
+        .m-sub  { font-size: 12px; color: var(--muted); margin-top: 3px; }
+        .m-close {
+            width: 32px; height: 32px; border-radius: 8px;
+            background: rgba(255,255,255,0.07); border: none; cursor: pointer;
+            color: var(--muted); font-size: 18px;
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.15s, color 0.15s;
+        }
+        .m-close:hover { background: rgba(255,255,255,0.12); color: #fff; }
+
+        .m-body { padding: 1.3rem 1.4rem; }
+
+        .m-sec-title {
+            font-size: 10px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.08em;
+            color: var(--muted); margin-bottom: 10px;
+        }
+
+        .m-feats { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1.4rem; }
+        .m-feat {
+            display: flex; align-items: flex-start; gap: 8px;
+            font-size: 13px; color: rgba(255,255,255,0.85);
+        }
+        .m-feat i { font-size: 15px; margin-top: 1px; flex-shrink: 0; }
+
+        .m-tiers { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+        .m-tier {
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px; padding: 12px 8px;
+            text-align: center;
+            background: rgba(255,255,255,0.03);
+        }
+        .m-tier.featured { border-width: 1.5px; }
+        .t-name  { font-size: 10px; color: var(--muted); margin-bottom: 5px; }
+        .t-price { font-size: 16px; font-weight: 700; color: #fff; }
+        .t-note  { font-size: 10px; color: var(--muted); margin-top: 3px; }
+
+        .m-foot {
+            padding: 1rem 1.4rem;
+            border-top: 1px solid rgba(255,255,255,0.07);
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .m-fp { font-size: 22px; font-weight: 700; color: #fff; }
+        .buy-btn {
+            display: inline-flex; align-items: center; gap: 7px;
+            padding: 10px 22px; border-radius: 10px; border: none;
+            font-size: 14px; font-weight: 500; color: #fff;
+            text-decoration: none; cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .buy-btn:hover { opacity: 0.88; }
+
+        /* ── FOOTER ── */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 2rem;
+            text-align: center;
+            font-size: 13px;
+            color: var(--muted);
+        }
+        footer a { color: var(--accent-light); text-decoration: none; }
+
+        /* ── RESPONSIVE ── */
+        @media(max-width:700px){
+            .nc-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 28px; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+    <a href="index.html" class="nav-logo">
+        <img src="icon.png" alt="Nexus">
+        <span class="nav-logo-text">Nexus <span>ERP</span></span>
+    </a>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="networking.html">IT Services</a></li>
+        <li><a href="connectors.html" class="active">Connectors</a></li>
+    </ul>
+    <a href="mailto:info@erpnexus.tech" class="nav-cta">Contact Us</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-badge"><i class="ti ti-plug"></i> Laravel Packages</div>
+    <h1>Nexus <span>Connectors</span></h1>
+    <p>Production-ready Laravel packages built and battle-tested across real deployments in Iraq and the Middle East.</p>
+</section>
+
+<!-- CARDS -->
+<div class="grid-wrap">
+    <div class="nc-grid">
+
+        <!-- QiCard -->
+        <div class="kpi-card card-y fa clickable" onclick="openModal()">
+            <div class="card-label">Payment Gateway</div>
+            <div class="card-title">QiCard</div>
+            <div class="card-desc">Full QiCard integration for Laravel — initiate payments, handle callbacks and webhooks.</div>
+            <div class="card-footer">
+                <span class="card-price">$200</span>
+                <span class="badge-live">Live</span>
+            </div>
+        </div>
+
+        <!-- OTPIQ -->
+        <div class="kpi-card card-g fb">
+            <div class="card-label">Messaging</div>
+            <div class="card-title">OTPIQ</div>
+            <div class="card-desc">SMS & WhatsApp OTP verification for Laravel using the OTPIQ platform.</div>
+            <div class="card-footer">
+                <span class="card-price">$100</span>
+                <span class="badge-soon">Coming Soon</span>
+            </div>
+        </div>
+
+        <!-- BunnyCDN -->
+        <div class="kpi-card card-o fc">
+            <div class="card-label">CDN & Storage</div>
+            <div class="card-title">BunnyCDN</div>
+            <div class="card-desc">Storage, image mirroring, and Stream video delivery connector for Laravel.</div>
+            <div class="card-footer">
+                <span class="card-price">$100</span>
+                <span class="badge-soon">Coming Soon</span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- MODAL — QiCard -->
+<div class="modal-overlay" id="modal-overlay" onclick="bgClick(event)">
+    <div class="modal">
+        <div class="m-head">
+            <div class="m-head-l">
+                <div class="m-icon" style="background:rgba(240,192,64,0.15);">
+                    <i class="ti ti-credit-card" style="color:#c09000;"></i>
+                </div>
+                <div>
+                    <div class="m-name">QiCard Laravel Connector</div>
+                    <div class="m-sub">Payment gateway — Iraqi market</div>
+                </div>
+            </div>
+            <button class="m-close" onclick="closeModal()"><i class="ti ti-x"></i></button>
+        </div>
+
+        <div class="m-body">
+            <div class="m-sec-title">What's included</div>
+            <div class="m-feats">
+                <div class="m-feat"><i class="ti ti-check" style="color:#c09000;"></i><span>Initiate QiCard payment sessions via clean API</span></div>
+                <div class="m-feat"><i class="ti ti-check" style="color:#c09000;"></i><span>Callback & webhook verification built in</span></div>
+                <div class="m-feat"><i class="ti ti-check" style="color:#c09000;"></i><span>Laravel Service Provider with auto-discovery</span></div>
+                <div class="m-feat"><i class="ti ti-check" style="color:#c09000;"></i><span>Facade support — QiCard::initiatePayment()</span></div>
+                <div class="m-feat"><i class="ti ti-check" style="color:#c09000;"></i><span>Config file publishable via artisan</span></div>
+                <div class="m-feat"><i class="ti ti-check" style="color:#c09000;"></i><span>Clean exception handling</span></div>
+                <div class="m-feat"><i class="ti ti-check" style="color:#c09000;"></i><span>Full README with integration examples</span></div>
+            </div>
+
+            <div class="m-sec-title">Choose a tier</div>
+            <div class="m-tiers">
+                <div class="m-tier">
+                    <div class="t-name">Package only</div>
+                    <div class="t-price">$200</div>
+                    <div class="t-note">ZIP download</div>
+                </div>
+                <div class="m-tier featured" style="border-color:#c09000;">
+                    <div class="t-name">Installed</div>
+                    <div class="t-price">$350</div>
+                    <div class="t-note">We set it up</div>
+                </div>
+                <div class="m-tier">
+                    <div class="t-name">Full support</div>
+                    <div class="t-price">$600</div>
+                    <div class="t-note">30-day support</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="m-foot">
+            <div class="m-fp">From $200</div>
+            <a class="buy-btn" style="background:#c09000;" href="mailto:info@erpnexus.tech?subject=Purchase: QiCard Laravel Connector">
+                <i class="ti ti-mail"></i> Purchase now
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    &copy; 2025 Nexus ERP Systems &mdash; <a href="mailto:info@erpnexus.tech">info@erpnexus.tech</a> &mdash; <a href="https://erpnexus.tech">erpnexus.tech</a>
+</footer>
+
+<script>
+    /* 3D tilt on QiCard only */
+    const card = document.querySelector('.clickable');
+    card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        const x = e.clientX - r.left, y = e.clientY - r.top;
+        const cx = r.width/2, cy = r.height/2;
+        const rx = ((y-cy)/cy)*-14, ry = ((x-cx)/cx)*14;
+        card.classList.add('no-float');
+        card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) scale3d(1.04,1.04,1.04)`;
+        card.style.setProperty('--mx', x+'px');
+        card.style.setProperty('--my', y+'px');
+    });
+    card.addEventListener('mouseleave', () => {
+        card.classList.remove('no-float');
+        card.style.transform = '';
+    });
+
+    /* Modal */
+    function openModal()  { document.getElementById('modal-overlay').classList.add('open'); }
+    function closeModal() { document.getElementById('modal-overlay').classList.remove('open'); }
+    function bgClick(e)   { if(e.target===document.getElementById('modal-overlay')) closeModal(); }
+
+    /* ESC key */
+    document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
+</script>
+
+</body>
+</html>

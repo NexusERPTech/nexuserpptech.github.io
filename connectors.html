@@ -137,7 +137,7 @@
 
         .nc-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 24px;
         }
 
@@ -189,14 +189,24 @@
             box-shadow: 0 8px 0 #7a3000, 0 18px 40px rgba(200,90,0,0.22);
             color: #3d1e00;
         }
+        .card-r {
+            background: linear-gradient(145deg, #fff0f0 0%, #e53e3e 100%);
+            box-shadow: 0 8px 0 #7a0000, 0 18px 40px rgba(220,0,0,0.25);
+            color: #3d0000;
+        }
+        .card-r:hover {
+            box-shadow: 0 14px 0 #7a0000, 0 28px 55px rgba(220,0,0,0.38);
+        }
 
         /* Float animations */
         @keyframes floatA { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-9px);} }
         @keyframes floatB { 0%,100%{transform:translateY(-9px);} 50%{transform:translateY(0);} }
         @keyframes floatC { 0%,100%{transform:translateY(-4px);} 50%{transform:translateY(-11px);} }
+        @keyframes floatD { 0%,100%{transform:translateY(-3px);} 50%{transform:translateY(-11px);} }
         .fa { animation: floatA 5.5s ease-in-out infinite; }
         .fb { animation: floatB 5.5s ease-in-out infinite; }
         .fc { animation: floatC 5.5s ease-in-out infinite; }
+        .fd { animation: floatD 5.5s ease-in-out infinite; }
         .no-float { animation: none !important; }
 
         .card-label {
@@ -363,7 +373,10 @@
         footer a { color: var(--accent-light); text-decoration: none; }
 
         /* ── RESPONSIVE ── */
-        @media(max-width:700px){
+        @media(max-width:900px){
+            .nc-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media(max-width:500px){
             .nc-grid { grid-template-columns: 1fr; }
             .hero h1 { font-size: 28px; }
             .nav-links { display: none; }
@@ -418,7 +431,16 @@
                 <span class="badge-soon">Coming Soon</span>
             </div>
         </div>
-
+        <!-- SilkRoute -->
+        <div class="kpi-card card-r fd">
+            <div class="card-label">Dropshipping</div>
+            <div class="card-title">SilkRoute</div>
+            <div class="card-desc">Connect your Laravel store to dropshipping suppliers — product sync, pricing engine, and order forwarding.</div>
+            <div class="card-footer">
+                <span class="card-price">$150</span>
+                <span class="badge-soon">Coming Soon</span>
+            </div>
+        </div>
         <!-- BunnyCDN -->
         <div class="kpi-card card-o fc">
             <div class="card-label">CDN & Storage</div>
